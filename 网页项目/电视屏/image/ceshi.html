@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>门店</title>
+    <!-- <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css"> -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+    <!-- <script src="https://unpkg.com/swiper/js/swiper.js"> </script> -->
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .many {
+            justify-content: space-between;
+            width: 100%;
+            height: 100vh;
+            /* height: 2000px; */
+            /* background: pink; */
+            display: flex;
+            justify-content: center;
+            /* background-image: url(./img/back.png); */
+        }
+
+        .many_pos {
+            position: relative;
+            width: 100%;
+            /* height: 1820px; */
+            height: 100vh;
+        }
+
+        .many_pos img {
+            width: 100%;
+            /* height: 1820px; */
+            height: 100vh;
+
+        }
+
+        .many_center_stores {
+            position: absolute;
+            /* width: 856px;
+            height: 108px; */
+            /* background: pink; */
+            right: 5%;
+            top: 6%;
+
+            /* transform: translateX(-50%); */
+            /* left: 50%; */
+        }
+
+        .stores_flex {
+            display: flex;
+            align-items: center;
+        }
+
+        .many_center_stores img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+
+        }
+
+        .stores_title {
+            font-size: 20px;
+            font-weight: 500;
+            height: 25px;
+
+            top: 20px;
+            color: #999999;
+        }
+
+        .many_center {
+            position: absolute;
+            width: 856px;
+            height: 408px;
+            /* background: pink; */
+            left: 50%;
+            top: 15.8%;
+            transform: translateX(-50%);
+            /* left: 50%; */
+        }
+
+        .many_center_two {
+            position: absolute;
+            width: 856px;
+            height: 408px;
+            /* background: pink; */
+            left: 50%;
+            top: 44.25%;
+            transform: translateX(-50%);
+            /* left: 50%; */
+        }
+
+        .many_center_three {
+            position: absolute;
+            width: 856px;
+            height: 408px;
+            /* background: pink; */
+            left: 50%;
+            top: 73.5%;
+            transform: translateX(-50%);
+            /* left: 50%; */
+        }
+
+        .center_flex {
+            width: 100%;
+            height: 100%;
+            /* background: lightgoldenrodyellow; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .center_flex_cen {
+            /* margin-top: 54px; */
+            width: 810px;
+            height: 336px;
+            /* background: pink; */
+        }
+
+        .bottom_right {
+            margin-top: 10px;
+            margin-right: 10px;
+            text-align: right;
+            font-size: 20px;
+            font-weight: 400;
+            color: rgba(85, 85, 85, 1);
+        }
+
+        .flex_for {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .flex_fors {
+            margin-top: 5px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .one {
+            text-align: center;
+            width: 110px;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba(234, 154, 36, 1);
+            /* height: 20px; */
+            /* background: lightgreen; */
+        }
+
+        .two {
+            text-align: center;
+            width: 122px;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba(234, 154, 36, 1);
+            /* height: 20px; */
+            /* background: limegreen; */
+        }
+
+        .three {
+            text-align: center;
+            width: 82px;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba(234, 154, 36, 1);
+            /* height: 20px; */
+            /* background: saddlebrown; */
+        }
+
+        .four {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba(234, 154, 36, 1);
+            width: 80px;
+            /* height: 20px; */
+            /* background: darkgoldenrod; */
+        }
+
+        .ones {
+            text-align: center;
+            width: 110px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            font-size: 20px;
+            font-weight: 500;
+            color: #555555;
+            /* height: 20px; */
+            /* background: lightgreen; */
+        }
+
+        .twos {
+            text-align: center;
+            width: 122px;
+            font-size: 20px;
+            font-weight: 500;
+            color: #555555;
+            /* height: 20px; */
+            /* background: limegreen; */
+        }
+
+        .threes {
+            text-align: center;
+            width: 82px;
+            font-size: 20px;
+            font-weight: 500;
+            color: #555555;
+            /* height: 20px; */
+            /* background: saddlebrown; */
+        }
+
+        .fours {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 500;
+            color: #555555;
+            width: 80px;
+            /* height: 20px; */
+            /* background: darkgoldenrod; */
+        }
+
+        /* .many_center {
+            width: 800px;
+            height: 100%;
+            background: lightcyan;
+            flex-wrap: wrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        } */
+
+        .many_center_f {
+            margin-top: 40px;
+            flex-direction: row;
+            flex-wrap: wrap;
+            background: coral;
+            width: 700px;
+            height: 600px;
+            display: flex;
+        }
+
+        .text {
+            width: 200px;
+            height: 120px;
+            font-size: 40px;
+            font-family: Source Han Sans CN;
+            font-weight: bold;
+            color: rgba(85, 85, 85, 1);
+        }
+
+        .right_but {
+            position: absolute;
+            top: 3%;
+            right: 5%;
+        }
+
+        .right_but button {
+            border: 0;
+            width: 48px;
+            height: 48px;
+            background-color: transparent;
+        }
+
+        .right_but button img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .none_back {
+            height: 220px;
+            /* background: seagreen; */
+        }
+
+        .demos {
+            margin-top: 20px;
+            width: 100%;
+            height: 240px;
+            /* background: lightblue; */
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        .swiper-slide {
+            height: 75px !important;
+            margin-top: 5px;
+            display: flex;
+            justify-content: space-around;
+            /* background: lightblue; */
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="app">
+        <div class="many">
+            <div class="many_pos">
+                <img src="./img/back.gif" alt="">
+                <div class="right_but">
+                    <button><img src="./img/black.png" alt=""></button>
+                </div>
+                <div class="many_center_stores">
+                    <div class="stores_flex">
+                        <img src="./img/addresslog.png" alt="">
+                        <div class="stores_title">{{storeName}}</div>
+                    </div>
+                </div>
+                <div class="many_center">
+                    <div class="center_flex">
+                        <div class="center_flex_cen">
+                            <div class="flex_fors">
+                                <div class="one">昵称</div>
+                                <div class="two">手机号</div>
+                                <div class="three">下单时间</div>
+                                <div class="four">订单状态</div>
+                            </div>
+                            <div class="none_back">
+                                <!-- <div class="flex_for" v-for="(item, index) in lists" :key="index">
+                                    <div class="ones">{{item.ordSn}}</div>
+                                    <div class="twos">{{item.customerId}}</div>
+                                    <div class="threes">{{item.area}}</div>
+                                    <div class="fours">{{item.readyStatus}}</div>
+                                </div> -->
+                                <div class="demos">
+                                    <div id="swpier-once" class="swiper-container">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide" v-for="(item, index) in lists" :key="index">
+                                                <div class="ones">{{item.ordSn}}</div>
+                                                <div class="twos">{{item.customerId}}</div>
+                                                <div class="threes">{{item.area}}</div>
+                                                <div class="fours">{{item.readyStatus}}</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="bottom_right">总计：{{oneData.total}}条</div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="many_center_two">
+                    <div class="center_flex">
+                        <div class="center_flex_cen">
+                            <div class="flex_fors">
+                                <div class="one">昵称</div>
+                                <div class="two">手机号</div>
+                                <div class="three">预约时间</div>
+                                <div class="four">订单状态</div>
+                            </div>
+                            <div class="none_back">
+                                <div class="demos">
+                                    <div id="swpier-two" class="swiper-container">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide" v-for="(item, index) in ceshiList" :key="index">
+                                                <div class="ones">{{item.customerNickName}}</div>
+                                                <div class="twos">{{item.customerPhone}}</div>
+                                                <div class="threes">{{item.startTime}}</div>
+                                                <div class="fours">{{item.status}}</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                               
+                                    <div class="bottom_right">总计：{{twoData.total}}条</div>
+
+                                </div>
+                            </div>
+
+
+                            <!-- <div class="bottom_right">总计：{{twoData.total}}条</div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="many_center_three">
+                    <div class="center_flex">
+                        <div class="center_flex_cen">
+                            <div class="flex_fors">
+                                <div class="one">昵称</div>
+                                <div class="two">手机号</div>
+                                <div class="three">预约时间</div>
+                                <div class="four">订单状态</div>
+                            </div>
+                            <div class="none_back">
+                                <!-- <div class="flex_for" v-for="(item, index) in nurseList" :key="index"> -->
+                                <!-- <div class="ones">{{item.customerNickName}}</div>
+                                    <div class="twos">{{item.customerPhone}}</div>
+                                    <div class="threes">{{item.startTime}}</div>
+                                    <div class="fours">{{item.status}}</div> -->
+                                <div class="demos">
+                                    <div id="swpier-three" class="swiper-container">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide" v-for="(item, index) in nurseList" :key="index">
+                                                <div class="ones">{{item.customerNickName}}</div>
+                                                <div class="twos">{{item.customerPhone}}</div>
+                                                <div class="threes">{{item.startTime}}</div>
+                                                <div class="fours">{{item.status}}</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- <div class="flex_for" v-for="(item, index) in ceshiList" :key="index">
+                                <div class="ones">{{item.customerNickName}}</div>
+                                    <div class="twos">{{item.customerPhone}}</div>
+                                    <div class="threes">{{item.startTime}}</div>
+                                    <div class="fours">{{item.status}}</div>
+                                </div> -->
+                                    <div class="bottom_right">总计：{{threeData.total}}条</div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://unpkg.com/swiper/js/swiper.min.js"> </script>
+        <!-- http://192.168.1.117:20003/api-RibbonManager/ -->
+        <script src="./js/vue.min.js"> </script>
+        <script src="./js/jquery-3.4.1.min.js"></script>
+        <script>
+            const log = console.log.bind(console)
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'Hello Vue!',
+                    lists: [
+                        {
+                            name: '小西瓜飒飒飒飒assassin',
+                            phone: '13667366656',
+                            time: '16:58:25',
+                            state: '已备货'
+                        },
+                        {
+                            name: '小西瓜',
+                            phone: '13667366656',
+                            time: '16:58:25',
+                            state: '已备货'
+                        },
+                        {
+                            name: '小西瓜',
+                            phone: '13667366656',
+                            time: '16:58:25',
+                            state: '已备货'
+                        },
+                        {
+                            name: '小西瓜',
+                            phone: '13667366656',
+                            time: '16:58:25',
+                            state: '已备货'
+                        },
+                        {
+                            name: '小西瓜',
+                            phone: '13667366656',
+                            time: '16:58:25',
+                            state: '已备货'
+                        }
+                    ],
+                    storeName: '',
+                    nurseList: [{ name: 'gua' }, { name: 'gua' }, { name: 'gua' }, { name: 'gua' }, { name: 'gua' }, { name: 'gua' }, { name: 'gua' },],
+                    cosmeticsList: [],
+                    threeData: { threeNumber: 0, total: 0, },
+                    twoData: { twoNumber: 0, total: 0, },
+                    storeId: '',
+                    startUrl: 'https://qinfuji.com/api-RibbonManager/',
+                    centertUrl: 'https://qinfuji.com/api-RibbonManager/',
+                    oneData: { oneNumber: 0, oneState: 0, total: 0, soltO: null, soltT: null },
+                    ceshiList: [],
+                    swiper: null,
+                    pageNo: 0,
+                    nnn: 0,
+                    lastBoole: null,
+                    onceRequestB: true,
+                    onceLastBoole: false,
+                    threeLastBoole: false,
+                    twoLastBoole: false,
+                    twoRequestB: true,
+                    threeRequestB: true
+                },
+                mounted() {
+                    // this.name();
+                    // this.tabeOneO()
+                    // this.tabeOneT()
+                    this._main()
+                },
+                methods: {
+                    names() {
+                        let that = this
+                        log('进去了吗有分页')
+                        let str = JSON.stringify({
+                            "distributorId": '2425939D-A24D-44CB-B9F0-D98CDC06B18B',
+                            "pageNo": that.pageNo,
+                            "pageSize": 10,
+                            "serviceTypeCode": "cz"
+                        })
+                        $.ajax({
+                            url: that.startUrl + "small/serviceAppointment/selectDistributorTVPageByQuery",
+                            type: 'post', crossDomain: true,
+                            xhrFields: { withCredentials: true },
+                            contentType: "application/json;charset=utf-8",
+                            dataType: 'json',
+                            data: str,
+                            //data: {name: "xu", foo: 'bar'},
+                            cache: false,
+                            headers: {
+                                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrZW4iLCJpYXQiOjE1Mzc1NTQzMDksImRhdGEiOnsidXNlcm5hbWUiOiJ4dXRvbmdiYW8iLCJpc19zdXBlcnVzZXIiOjEsImlkIjoxNywibG9naW5fdGltZSI6MTUzNzU1NDMwOX0sImV4cCI6MTUzODE1NDMwOX0.32Lys4hjjY2XRpM2r9YSmpYA798u821m_M5Tzb6wxIU",
+                                'Content-Type': 'application/json'  //application/x-www-form-urlencoded  application/json
+                            },
+                            success: function (res) {
+                                if (res.code === 200) {
+                                    log(res, '返回彩妆数据')
+                                    let data = res.data.data
+                                    if (data.length !== 0) {
+                                        let a = []
+                                        let b = {}
+                                        data.forEach(e => {
+                                            e.customerNickName = that.nnn++
+                                            a.push(e)
+                                        });
+                                        if (res.data.last == false) {
+                                            that.lastBoole = false
+                                        } else {
+                                            that.lastBoole = true
+                                        }
+                                        // a = that.ceshiList
+                                        // a.push({customerPhone:1,startTime:2,status:3,customerNickName:5})
+                                        // a.push(that.ceshiList[0])
+                                        // // a.push({a:1,b:2})
+                                        that.ceshiList = a
+                                        log(that.ceshiList, '变多了吗')
+                                        if (that.ceshiList.length < 4) {
+                                            setTimeout(() => {
+                                                that.nnn = 0
+                                                that.pageNo = 0
+                                                that.name()
+                                            }, 3000);
+                                        }
+                                        // that.swiper.updateSlides()
+                                    } else {
+
+                                    }
+
+                                    // that.swiper.updateSlides();
+                                    // <div class="ones">{{item.customerNickName}}</div>
+                                    //     <div class="twos">{{item.customerPhone}}</div>
+                                    //     <div class="threes">{{item.startTime}}</div>
+                                    //     <div class="fours">{{item.status}}</div>
+                                    // that.ceshiList = data
+                                    // log(that.ceshiList, '返回彩妆数据')
+                                    // let a = ` <div class="swiper-container">
+                                    //         <div class="swiper-wrapper">
+                                    //             <div class="swiper-slide">
+                                    //                 <div class="ones">${data[0].customerNickName}</div>
+                                    //     <div class="twos">${data[0].customerPhone}</div>
+                                    //     <div class="threes">${data[0].startTime}</div>
+                                    //     <div class="fours">${data[0].status}</div>
+                                    // </div>
+
+                                    //             <div class="swiper-slide">Slide 7</div>
+                                    //             <div class="swiper-slide">Slide 8</div>
+                                    //             <div class="swiper-slide">Slide 9</div>
+                                    //             <div class="swiper-slide">Slide 10</div>
+                                    //         </div>`
+                                    //         $('.demos').html(a);
+                                    // <div class="swiper-slide">Slide 2</div>
+                                    //     <div class="swiper-slide">Slide 3</div>
+                                    //     <div class="swiper-slide">Slide 4</div>
+                                    //     <div class="swiper-slide">Slide 5</div>
+                                    //     <div class="swiper-slide">Slide 6</div>
+
+                                }
+                            },
+                        });
+                    },
+                    namess() {
+                        let that = this
+                        log('进去了吗没分页')
+                        let str = JSON.stringify({
+                            "distributorId": '2425939D-A24D-44CB-B9F0-D98CDC06B18B',
+                            "pageNo": 0,
+                            "pageSize": 10,
+                            "serviceTypeCode": "cz"
+                        })
+                        $.ajax({
+                            url: that.startUrl + "small/serviceAppointment/selectDistributorTVPageByQuery",
+                            type: 'post', crossDomain: true,
+                            xhrFields: { withCredentials: true },
+                            contentType: "application/json;charset=utf-8",
+                            dataType: 'json',
+                            data: str,
+                            //data: {name: "xu", foo: 'bar'},
+                            cache: false,
+                            headers: {
+                                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrZW4iLCJpYXQiOjE1Mzc1NTQzMDksImRhdGEiOnsidXNlcm5hbWUiOiJ4dXRvbmdiYW8iLCJpc19zdXBlcnVzZXIiOjEsImlkIjoxNywibG9naW5fdGltZSI6MTUzNzU1NDMwOX0sImV4cCI6MTUzODE1NDMwOX0.32Lys4hjjY2XRpM2r9YSmpYA798u821m_M5Tzb6wxIU",
+                                'Content-Type': 'application/json'  //application/x-www-form-urlencoded  application/json
+                            },
+                            success: function (res) {
+                                if (res.code === 200) {
+                                    log(res, '从0开始')
+                                    let data = res.data.data
+                                    if (data.length !== 0) {
+                                        let a = []
+                                        let b = {}
+                                        data.forEach(e => {
+                                            e.customerNickName = that.nnn++
+                                            a.push(e)
+                                        });
+                                        if (res.data.last == false) {
+                                            that.lastBoole = false
+                                            that.pageNo = 1
+                                        } else {
+                                            that.lastBoole = true
+                                        }
+                                        // a = that.ceshiList
+                                        // a.push({customerPhone:1,startTime:2,status:3,customerNickName:5})
+                                        // a.push(that.ceshiList[0])
+                                        // // a.push({a:1,b:2})
+
+                                        that.ceshiList = a
+                                        log(that.ceshiList, '返回初始状态')
+                                        // that.swiper.updateSlides()
+                                    } else {
+
+                                    }
+
+                                    // that.swiper.updateSlides();
+                                    // <div class="ones">{{item.customerNickName}}</div>
+                                    //     <div class="twos">{{item.customerPhone}}</div>
+                                    //     <div class="threes">{{item.startTime}}</div>
+                                    //     <div class="fours">{{item.status}}</div>
+                                    // that.ceshiList = data
+                                    // log(that.ceshiList, '返回彩妆数据')
+                                    // let a = ` <div class="swiper-container">
+                                    //         <div class="swiper-wrapper">
+                                    //             <div class="swiper-slide">
+                                    //                 <div class="ones">${data[0].customerNickName}</div>
+                                    //     <div class="twos">${data[0].customerPhone}</div>
+                                    //     <div class="threes">${data[0].startTime}</div>
+                                    //     <div class="fours">${data[0].status}</div>
+                                    // </div>
+
+                                    //             <div class="swiper-slide">Slide 7</div>
+                                    //             <div class="swiper-slide">Slide 8</div>
+                                    //             <div class="swiper-slide">Slide 9</div>
+                                    //             <div class="swiper-slide">Slide 10</div>
+                                    //         </div>`
+                                    //         $('.demos').html(a);
+                                    // <div class="swiper-slide">Slide 2</div>
+                                    //     <div class="swiper-slide">Slide 3</div>
+                                    //     <div class="swiper-slide">Slide 4</div>
+                                    //     <div class="swiper-slide">Slide 5</div>
+                                    //     <div class="swiper-slide">Slide 6</div>
+
+                                }
+                            },
+                        });
+                    },
+                    name() {
+                        let that = this
+                        log('进去了吗')
+                        let str = JSON.stringify({
+                            "distributorId": that.storeId,
+                            "pageNo": that.twoData.twoNumber,
+                            "pageSize": 10,
+                            "serviceTypeCode": "cz"
+                        })
+                        $.ajax({
+                            url: that.startUrl + "small/serviceAppointment/selectDistributorTVPageByQuery",
+                            type: 'post', crossDomain: true,
+                            xhrFields: { withCredentials: true },
+                            contentType: "application/json;charset=utf-8",
+                            dataType: 'json',
+                            data: str,
+                            //data: {name: "xu", foo: 'bar'},
+                            cache: false,
+                            headers: {
+                                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrZW4iLCJpYXQiOjE1Mzc1NTQzMDksImRhdGEiOnsidXNlcm5hbWUiOiJ4dXRvbmdiYW8iLCJpc19zdXBlcnVzZXIiOjEsImlkIjoxNywibG9naW5fdGltZSI6MTUzNzU1NDMwOX0sImV4cCI6MTUzODE1NDMwOX0.32Lys4hjjY2XRpM2r9YSmpYA798u821m_M5Tzb6wxIU",
+                                'Content-Type': 'application/json'  //application/x-www-form-urlencoded  application/json
+                            },
+                            success: function (res) {
+                                if (res.data.data.length >0) {
+                                    log(res, '返回彩妆数据')
+                                    let data = res.data.data
+                                    // data.forEach(e => {
+                                    //     e.customerNickName = that.nnn++
+                                    // });
+                                    if (res.data.last == false) {
+                                        that.twoLastBoole = false
+                                    } else {
+                                        that.twoLastBoole = true
+                                    }
+                                    // <div class="ones">{{item.customerNickName}}</div>
+                                    //     <div class="twos">{{item.customerPhone}}</div>
+                                    //     <div class="threes">{{item.startTime}}</div>
+                                    //     <div class="fours">{{item.status}}</div>
+                                    that.ceshiList = data
+                                    that.twoData.total = res.data.total
+                                    that.ceshiList.forEach(e => {
+                                        if (e.status == 0) {
+                                            e.status = '待服务'
+                                        } else {
+                                            e.status = '已完成'
+                                        }
+
+                                    });
+                                    log(that.ceshiList, '返回彩妆数据')
+                                    if (that.ceshiList.length < 4) {
+                                        setTimeout(() => {
+                                            that.nnn = 0
+                                            that.twoData.twoNumber = 0
+                                            that.name()
+                                        }, 3000);
+                                    }
+                                    if (that.ceshiList.length > 3 && that.twoRequestB) {
+                                        log('争取')
+                                        that.twoRequestB = false
+                                        setTimeout(() => {
+                                            log('争取2')
+                                            that.swiper = new Swiper('#swpier-two', {
+                                                direction: 'vertical',
+                                                watchOverflow: true,//因为仅有1个slide，swiper无效
+                                                // loop: true,
+                                                observer: true,
+                                                slidesPerView: 3,
+                                                // loopAdditionalSlides: 6,
+                                                // spaceBetween: 10,
+                                                autoplay: {
+                                                    delay: 2000,
+                                                    stopOnLastSlide: false,
+                                                    disableOnInteraction: true,
+                                                },
+                                                on: {
+                                                    reachEnd: function () {
+                                                        log('到了最后一个')
+                                                        if (that.twoLastBoole == false) {
+                                                            that.twoData.twoNumber++
+                                                            that.name()
+                                                            // alert('qq')
+                                                        } else {
+                                                            that.twoData.twoNumber = 0
+                                                            that.name()
+                                                        }
+
+                                                    },
+                                                },
+                                                // pagination: {
+                                                //     el: '.swiper-pagination',
+                                                //     clickable: true,
+                                                // },
+                                            });
+                                        }, 3000);
+                                    }
+                        
+
+                                } else {
+                                    that.twoData.twoNumber = 0
+                                                            that.name()
+                                }
+                            },
+                        });
+                    },
+                    tabeOneO() {
+                        let that = this
+                        let str = JSON.stringify({
+                            "distributorId": that.storeId,
+                            "orderDirection": "desc",
+                            "orderField": "createdAt",
+                            "pageNo": that.oneData.oneNumber,
+                            "pageSize": 10
+                        })
+                        $.ajax({
+                            url: that.startUrl + "/small/orderForm/findSmallPageListByExampleToTV",
+                            type: 'post', crossDomain: true,
+                            xhrFields: { withCredentials: true },
+                            contentType: "application/json;charset=utf-8",
+                            dataType: 'json',
+                            data: str,
+                            //data: {name: "xu", foo: 'bar'},
+                            cache: false,
+                            headers: {
+                                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrZW4iLCJpYXQiOjE1Mzc1NTQzMDksImRhdGEiOnsidXNlcm5hbWUiOiJ4dXRvbmdiYW8iLCJpc19zdXBlcnVzZXIiOjEsImlkIjoxNywibG9naW5fdGltZSI6MTUzNzU1NDMwOX0sImV4cCI6MTUzODE1NDMwOX0.32Lys4hjjY2XRpM2r9YSmpYA798u821m_M5Tzb6wxIU",
+                                'Content-Type': 'application/json'  //application/x-www-form-urlencoded  application/json
+                            },
+                            success: function (res) {
+                                if (res.data.data.length >0 ) {
+                                    log(res, '返回彩妆数据')
+                                    let data = res.data.data
+                                    // data.forEach(e => {
+                                    //     e.customerNickName = that.nnn++
+                                    // });
+                                    if (res.data.last == false) {
+                                        that.onceLastBoole = false
+                                    } else {
+                                        that.onceLastBoole = true
+                                    }
+
+                                    that.lists = data
+                                    that.oneData.total = res.data.total
+                                    that.lists.forEach(e => {
+                                        // e.readyStatus = '备货中'
+                                        if (e.readyStatus == 0) {
+                                            e.readyStatus = '备货中'
+                                        } else {
+                                            e.readyStatus = '待提货'
+                                        }
+                                    });
+                                    log(that.lists, '返回彩妆数据')
+                                    if (that.lists.length < 4) {
+                                        setTimeout(() => {
+                                            // that.nnn = 0
+                                            that.oneData.oneNumber = 0
+                                            that.tabeOneO()
+                                        }, 3000);
+                                    }
+                                    if (that.lists.length > 3 && that.onceRequestB) {
+                                        log('争取')
+                                        that.onceRequestB = false
+                                        setTimeout(() => {
+                                            log('争取2')
+                                            that.swiper = new Swiper('#swpier-once', {
+                                                direction: 'vertical',
+                                                watchOverflow: true,//因为仅有1个slide，swiper无效
+                                                // loop: true,
+                                                observer: true,
+                                                slidesPerView: 3,
+                                                // loopAdditionalSlides: 6,
+                                                // spaceBetween: 10,
+                                                autoplay: {
+                                                    delay: 2000,
+                                                    stopOnLastSlide: false,
+                                                    disableOnInteraction: true,
+                                                },
+                                                on: {
+                                                    reachEnd: function () {
+                                                        log('到了最后一个')
+                                                        if (that.onceLastBoole == false) {
+                                                            that.oneData.oneNumber++
+                                                            that.tabeOneO()
+                                                            // alert('qq')
+                                                        } else {
+                                                            that.oneData.oneNumber = 0
+                                                            that.tabeOneO()
+                                                        }
+
+                                                    },
+                                                },
+
+                                            });
+                                        }, 3000);
+                                    }
+
+
+                                } else {
+                                    that.oneData.oneNumber = 0
+                                    that.tabeOneO()
+                                }
+
+
+                            },
+
+                        });
+                    },
+                    tabeOneT() {
+                    let that = this
+                    let str = JSON.stringify({
+                        "distributorId":that.storeId,
+                        "pageNo": that.threeData.threeNumber,
+                        "pageSize": 10,
+                        "serviceTypeCode": "hl"
+                    })
+                    $.ajax({
+                        url: that.startUrl + "/small/serviceAppointment/selectDistributorTVPageByQuery",
+                        type: 'post', crossDomain: true,
+                        xhrFields: { withCredentials: true },
+                        contentType: "application/json;charset=utf-8",
+                        dataType: 'json',
+                        data: str,
+                        //data: {name: "xu", foo: 'bar'},
+                        cache: false,
+                        headers: {
+                            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrZW4iLCJpYXQiOjE1Mzc1NTQzMDksImRhdGEiOnsidXNlcm5hbWUiOiJ4dXRvbmdiYW8iLCJpc19zdXBlcnVzZXIiOjEsImlkIjoxNywibG9naW5fdGltZSI6MTUzNzU1NDMwOX0sImV4cCI6MTUzODE1NDMwOX0.32Lys4hjjY2XRpM2r9YSmpYA798u821m_M5Tzb6wxIU",
+                            'Content-Type': 'application/json'  //application/x-www-form-urlencoded  application/json
+                        },
+                        success: function (res) {
+
+
+                            if (res.data.data.length >0) {
+                                    log(res, '返回护理数据')
+                                    let data = res.data.data
+                                    // data.forEach(e => {
+                                    //     e.customerNickName = that.nnn++
+                                    // });
+                                    if (res.data.last == false) {
+                                        that.threeLastBoole = false
+                                    } else {
+                                        that.threeLastBoole = true
+                                    }
+                                   
+                                    that.nurseList = data
+                                    that.threeData.total = res.data.total
+                                    that.nurseList.forEach(e => {
+                                        if (e.status == 0) {
+                                            e.status = '待服务'
+                                        } else {
+                                            e.status = '已完成'
+                                        }
+
+                                    });
+                                    log(that.nurseList, '返回彩妆数据')
+                                    if (that.nurseList.length < 4) {
+                                        setTimeout(() => {
+                                            that.nnn = 0
+                                            that.threeData.threeNumber = 0
+                                            that.tabeOneT()
+                                        }, 3000);
+                                    }
+                                    if (that.nurseList.length > 3 && that.threeRequestB) {
+                                        log('争取')
+                                        that.threeRequestB = false
+                                        setTimeout(() => {
+                                            log('争取2')
+                                            that.swiper = new Swiper('#swpier-three', {
+                                                direction: 'vertical',
+                                                watchOverflow: true,//因为仅有1个slide，swiper无效
+                                                // loop: true,
+                                                observer: true,
+                                                slidesPerView: 3,
+                                                // loopAdditionalSlides: 6,
+                                                // spaceBetween: 10,
+                                                autoplay: {
+                                                    delay: 2000,
+                                                    stopOnLastSlide: false,
+                                                    disableOnInteraction: true,
+                                                },
+                                                on: {
+                                                    reachEnd: function () {
+                                                        log('到了最后一个')
+                                                        if (that.threeLastBoole == false) {
+                                                            that.threeData.threeNumber++
+                                                            that.tabeOneT()
+                                                            // alert('qq')
+                                                        } else {
+                                                            that.threeData.threeNumber = 0
+                                                            that.tabeOneT()
+                                                        }
+
+                                                    },
+                                                },
+                                                // pagination: {
+                                                //     el: '.swiper-pagination',
+                                                //     clickable: true,
+                                                // },
+                                            });
+                                        }, 3000);
+                                    }
+                        
+
+                                } else {
+                                    that.threeData.threeNumber = 0
+                                                            that.tabeOneT()
+                                }
+                            // if (res.code === 200) {
+                            //     log(res, '返回护理数据')
+                            //     let data = res.data.data
+                            //     that.threeData.threeNumber = res.data.number += 1
+                            //     log(res.data.number++, '@@@@@')
+                            //     if (res.data.last == true) {
+                            //         that.threeData.threeNumber = 0
+                            //     }
+                            //     if (data.length !== 0) {
+                            //         that.threeData.total = res.data.total
+                            //         that.nurseList = data
+                            //         that.nurseList.forEach(e => {
+                            //             if (e.status == 0) {
+                            //                 e.status = '待服务'
+                            //             } else {
+                            //                 e.status = '已完成'
+                            //             }
+
+                            //         });
+                            //     } else {
+                            //         that.threeData.total = 0
+                            //         that.nurseList = []
+                            //     }
+                            //     return data
+                            // }
+                        },
+                        
+                    });
+                },
+                _main() {
+                    let that = this
+                    that.storeName = localStorage.getItem('name')
+                    that.storeId = localStorage.getItem('id')
+                    that.name();
+                    that.tabeOneO()
+                    that.tabeOneT()
+                },
+                },
+            })
+            var tabeOneR = function () {
+                let that = this
+                log('进去了吗')
+                let str = JSON.stringify({
+                    "distributorId": '2425939D-A24D-44CB-B9F0-D98CDC06B18B',
+                    "pageNo": 0,
+                    "pageSize": 5,
+                    "serviceTypeCode": "cz"
+                })
+                $.ajax({
+                    url: "https://qinfuji.com/api-RibbonManager/small/serviceAppointment/selectDistributorTVPageByQuery",
+                    type: 'post', crossDomain: true,
+                    xhrFields: { withCredentials: true },
+                    contentType: "application/json;charset=utf-8",
+                    dataType: 'json',
+                    data: str,
+                    //data: {name: "xu", foo: 'bar'},
+                    cache: false,
+                    headers: {
+                        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrZW4iLCJpYXQiOjE1Mzc1NTQzMDksImRhdGEiOnsidXNlcm5hbWUiOiJ4dXRvbmdiYW8iLCJpc19zdXBlcnVzZXIiOjEsImlkIjoxNywibG9naW5fdGltZSI6MTUzNzU1NDMwOX0sImV4cCI6MTUzODE1NDMwOX0.32Lys4hjjY2XRpM2r9YSmpYA798u821m_M5Tzb6wxIU",
+                        'Content-Type': 'application/json'  //application/x-www-form-urlencoded  application/json
+                    },
+                    success: function (res) {
+                        if (res.code === 200) {
+                            log(res, '返回彩妆数据')
+                            let data = res.data.data
+                            // <div class="ones">{{item.customerNickName}}</div>
+                            //     <div class="twos">{{item.customerPhone}}</div>
+                            //     <div class="threes">{{item.startTime}}</div>
+                            //     <div class="fours">{{item.status}}</div>
+                            this.ceshiList = data
+                            log(this.ceshiList, '返回彩妆数据')
+                            // let a = ` <div class="swiper-container">
+                            //         <div class="swiper-wrapper">
+                            //             <div class="swiper-slide">
+                            //                 <div class="ones">${data[0].customerNickName}</div>
+                            //     <div class="twos">${data[0].customerPhone}</div>
+                            //     <div class="threes">${data[0].startTime}</div>
+                            //     <div class="fours">${data[0].status}</div>
+                            // </div>
+
+                            //             <div class="swiper-slide">Slide 7</div>
+                            //             <div class="swiper-slide">Slide 8</div>
+                            //             <div class="swiper-slide">Slide 9</div>
+                            //             <div class="swiper-slide">Slide 10</div>
+                            //         </div>`
+                            //         $('.demos').html(a);
+                            // <div class="swiper-slide">Slide 2</div>
+                            //     <div class="swiper-slide">Slide 3</div>
+                            //     <div class="swiper-slide">Slide 4</div>
+                            //     <div class="swiper-slide">Slide 5</div>
+                            //     <div class="swiper-slide">Slide 6</div>
+                            var swiper = new Swiper('.swiper-container', {
+                                direction: 'vertical',
+                                loop: true,
+                                slidesPerView: 5,
+                                loopAdditionalSlides: 6,
+                                // spaceBetween: 20,
+                                autoplay: {
+                                    delay: 1000,
+                                    stopOnLastSlide: false,
+                                    disableOnInteraction: true,
+                                },
+                                // pagination: {
+                                //     el: '.swiper-pagination',
+                                //     clickable: true,
+                                // },
+                            });
+                        }
+                    },
+                });
+            }
+    //    var _main = function() {
+    //     tabeOneR()
+    //    }
+    //    _main()
+        </script>
+</body>
+
+</html>

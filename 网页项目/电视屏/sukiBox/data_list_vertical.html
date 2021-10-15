@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据列表</title>
+    <!-- <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css"> -->
+    <link rel="stylesheet" href="./css/swiper.min.css">
+    <!-- <script src="https://unpkg.com/swiper/js/swiper.js"> </script> -->
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .many {
+            justify-content: space-between;
+            width: 100%;
+            height: 100vh;
+            /* height: 2000px; */
+            /* background: pink; */
+            display: flex;
+            justify-content: center;
+            /* background-image: url(./img/back.png); */
+        }
+
+        .many_pos {
+            position: relative;
+            width: 100%;
+            /* height: 1820px; */
+            height: 100vh;
+        }
+
+        .many_pos img {
+            width: 100%;
+            /* height: 1820px; */
+            height: 100vh;
+
+        }
+
+        .many_center_stores {
+            position: absolute;
+            /* width: 856px;
+            height: 108px; */
+            /* background: pink; */
+            right: 5%;
+            top: 6%;
+
+            /* transform: translateX(-50%); */
+            /* left: 50%; */
+        }
+
+        .stores_flex {
+            display: flex;
+            align-items: center;
+        }
+
+        .many_center_stores img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+
+        }
+
+        .stores_title {
+            font-size: 20px;
+            font-weight: 500;
+            height: 25px;
+
+            top: 20px;
+            color: #999999;
+        }
+
+        .many_center {
+            position: absolute;
+            width: 856px;
+            height: 408px;
+            /* background: pink; */
+            left: 50%;
+            top: 15.8%;
+            transform: translateX(-50%);
+            /* left: 50%; */
+        }
+
+        .many_center_two {
+            position: absolute;
+            width: 856px;
+            height: 408px;
+            /* background: pink; */
+            left: 50%;
+            top: 44.25%;
+            transform: translateX(-50%);
+            /* left: 50%; */
+        }
+
+        .many_center_three {
+            position: absolute;
+            width: 856px;
+            height: 408px;
+            /* background: pink; */
+            left: 50%;
+            top: 73.5%;
+            transform: translateX(-50%);
+            /* left: 50%; */
+        }
+
+        .center_flex {
+            width: 100%;
+            height: 100%;
+            /* background: lightgoldenrodyellow; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .center_flex_cen {
+            /* margin-top: 54px; */
+            width: 810px;
+            height: 336px;
+            /* background: pink; */
+        }
+
+        .bottom_right {
+            margin-top: 10px;
+            margin-right: 10px;
+            text-align: right;
+            font-size: 20px;
+            font-weight: 400;
+            color: rgba(85, 85, 85, 1);
+        }
+
+        .flex_for {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .flex_fors {
+            margin-top: 5px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .one {
+            text-align: center;
+            width: 110px;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba(234, 154, 36, 1);
+            /* height: 20px; */
+            /* background: lightgreen; */
+        }
+
+        .two {
+            text-align: center;
+            width: 122px;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba(234, 154, 36, 1);
+            /* height: 20px; */
+            /* background: limegreen; */
+        }
+
+        .three {
+            text-align: center;
+            width: 82px;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba(234, 154, 36, 1);
+            /* height: 20px; */
+            /* background: saddlebrown; */
+        }
+
+        .four {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba(234, 154, 36, 1);
+            width: 80px;
+            /* height: 20px; */
+            /* background: darkgoldenrod; */
+        }
+
+        .ones {
+            text-align: center;
+            width: 110px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            font-size: 20px;
+            font-weight: 500;
+            color: #555555;
+            /* height: 20px; */
+            /* background: lightgreen; */
+        }
+
+        .twos {
+            text-align: center;
+            width: 122px;
+            font-size: 20px;
+            font-weight: 500;
+            color: #555555;
+            /* height: 20px; */
+            /* background: limegreen; */
+        }
+
+        .threes {
+            text-align: center;
+            width: 82px;
+            font-size: 20px;
+            font-weight: 500;
+            color: #555555;
+            /* height: 20px; */
+            /* background: saddlebrown; */
+        }
+
+        .fours {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 500;
+            color: #555555;
+            width: 80px;
+            /* height: 20px; */
+            /* background: darkgoldenrod; */
+        }
+
+        /* .many_center {
+            width: 800px;
+            height: 100%;
+            background: lightcyan;
+            flex-wrap: wrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        } */
+
+        .many_center_f {
+            margin-top: 40px;
+            flex-direction: row;
+            flex-wrap: wrap;
+            background: coral;
+            width: 700px;
+            height: 600px;
+            display: flex;
+        }
+
+        .text {
+            width: 200px;
+            height: 120px;
+            font-size: 40px;
+            font-family: Source Han Sans CN;
+            font-weight: bold;
+            color: rgba(85, 85, 85, 1);
+        }
+
+        .right_but {
+            position: absolute;
+            top: 3%;
+            right: 5%;
+        }
+
+        .right_but button {
+            border: 0;
+            width: 48px;
+            height: 48px;
+            background-color: transparent;
+        }
+
+        .right_but button img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .none_back {
+            height: 220px;
+            /* background: seagreen; */
+        }
+
+        .demos {
+            margin-top: 20px;
+            width: 100%;
+            height: 240px;
+            /* background: lightblue; */
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        .swiper-slide {
+            height: 75px !important;
+            margin-top: 5px;
+            display: flex;
+            justify-content: space-around;
+            /* background: lightblue; */
+        }
+        .dialog{
+          position: fixed;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,.5);
+          z-index: 9999;
+        }
+        .dialog ul{
+          position: absolute;
+          top: 25%;
+          list-style: none;
+          left: 50%;
+          transform: translateX(-50%);
+          padding: 0;
+        }
+        .dialog ul li{
+          width:600px;
+          height:120px;
+          background:rgba(241,241,241,1);
+          line-height: 120px;
+          text-align: center;
+          font-size:32px;
+          font-family:Source Han Sans CN;
+          font-weight:500;
+          color:rgba(64,64,64,1);
+          margin-top: 6px;
+          margin: 10px auto;
+        }
+        .dialog ul li:hover{
+          width:660px;
+          margin: 10px auto;
+          height:120px;
+          background:rgba(234,154,36,1);
+          box-shadow:0px 15px 34px 6px rgba(0, 0, 0, 0.4);
+          font-size:32px;
+          font-family:Source Han Sans CN;
+          font-weight:500;
+          color:rgba(255,255,255,1);
+          text-align: center;
+          line-height: 120px;
+        }
+        .dialog ul .active{
+          width:660px;
+          margin: 10px auto;
+          height:120px;
+          background:rgba(234,154,36,1);
+          box-shadow:0px 15px 34px 6px rgba(0, 0, 0, 0.4);
+          font-size:32px;
+          font-family:Source Han Sans CN;
+          font-weight:500;
+          color:rgba(255,255,255,1);
+          text-align: center;
+          line-height: 120px;
+        }
+        .many_center_two_title{
+            font-size: 24px;
+            font-family: Source Han Sans SC;
+            font-weight: 500;
+            color: rgba(249,249,249,1);
+            text-align: center;
+            line-height: 70px;
+            width: 280px;
+            position: absolute;
+            top: -14%;
+            left: 34%;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .many_center_three_title{
+            font-size: 24px;
+            font-family: Source Han Sans SC;
+            font-weight: 500;
+            color: rgba(249,249,249,1);
+            text-align: center;
+            line-height: 55px;
+            width: 280px;
+            position: absolute;
+            top: -14%;
+            left: 34%;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        button:focus {outline:none;}
+        [v-cloak] { display: none; }
+    </style>
+</head>
+
+
+<body>
+    <div id="app">
+        <div class="many">
+            <div class="many_pos">
+                <img src="./img/back.png" alt="">
+                <div class="right_but">
+                    <button @click="backHome"><img src="https://suki-image.oss-cn-shenzhen.aliyuncs.com/sukiTV/black.png" alt=""></button>
+                </div>
+                <div class="many_center_two">
+                    <button class="many_center_two_title">打包区</button>
+                    <div class="center_flex">
+                        <div class="center_flex_cen">
+                            <div class="flex_fors">
+                              <div class="one">昵称</div>
+                              <div class="two">手机尾号</div>
+                            </div>
+                            <div class="none_back">
+                                <div class="demos">
+                                    <div id="swpier-two" class="swiper-container">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide" v-for="(item, index) in listCard" :key="index" v-cloak>
+                                              <div class="ones">{{item.receiverName}}</div>
+                                              <div class="twos">{{item.phoneMantissa}}</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="many_center_three">
+                    <button class="many_center_three_title">待取货</button>
+                    <div class="center_flex">
+                        <div class="center_flex_cen">
+                            <div class="flex_fors">
+                              <div class="one">昵称</div>
+                              <div class="two">手机尾号</div>
+                            </div>
+                            <div class="none_back">
+                                <div class="demos">
+                                    <div id="swpier-three" class="swiper-container">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide" v-for="(item, index) in pickedUpList" :key="index" v-cloak>
+                                              <div class="ones">{{item.receiverName}}</div>
+                                              <div class="twos">{{item.phoneMantissa}}</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <script src="./js/swiper.min.js"> </script>
+        <!-- http://192.168.1.117:20003/api-RibbonManager/ -->
+        <script src="./js/vue.min.js"> </script>
+        <script src="./js/jquery-3.4.1.min.js"></script>
+        <script>
+            const log = console.log.bind(console)
+            var app = new Vue({
+                el: '#app',
+                data: {
+                  distributorNumber: '',
+                    startUrl:"http://192.168.10.47:20003/api-RibbonManager/",
+                    pickedUpList:[],
+                    listCard:[],
+                },
+                mounted() {
+                    this._main()
+                },
+                methods: {
+                    // 返回
+                    backHome(){
+                        window.location.href='./index.html'
+                    },
+                    //查询列表
+                    queryList() {
+                      let that = this;
+                      $.post(that.startUrl + "youzhan/orderForm/youzan/getNoticeYouZanTvBetaken",{
+                        "distributorNumber":that.distributorNumber
+                      }, (data) => {
+                          if (data.code != 200) {
+                            that.$message.error("抱歉，网络异常！")
+                          } else {
+                            that.pickedUpList=data.data
+                          }
+                      });
+                    },
+                    logins() {
+                      let that = this;
+                      $.post(that.startUrl + "youzhan/orderForm/youzan/tvBetakenPhone",{
+                        "distributorNumber":that.distributorNumber
+                      }, (data) => {
+                          if (data.code != 200) {
+                            that.$message.error("抱歉，网络异常！")
+                          } else {
+                            that.listCard=data.data
+                          }
+                      });
+                    },
+                    _main() {
+                      let that = this
+                      that.distributorNumber = localStorage.getItem('storeNumber')
+                      that.queryList();
+                      that.logins();
+                    },
+                },
+            })
+        </script>
+</body>
+
+</html>

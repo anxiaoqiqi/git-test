@@ -1,0 +1,210 @@
+.main{
+  width: 100%;
+  margin: 50px auto 0;
+  overflow: hidden;
+
+}
+.list_btn{
+  width: 66%;
+  list-style: none;
+  float: left;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+.list_btn li{
+  color: #fff;
+  background-color: #409eff;
+  border-color: #409eff;
+  border-radius: 5%;
+  width: 168px;
+  height: 60px;
+  margin-bottom: 20px;
+  float: left;
+  font-size: 28px;
+  line-height: 60px;
+  text-align: center;
+  margin-left: 30px;
+  cursor: pointer;
+  margin-top: 30px;
+  position: relative;
+}
+.list_btn li span{
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  color: #fff;
+  background-color: #409eff;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: center;
+  width: 84px;
+  height: 30px;
+  border-radius: 5%;
+
+}
+.list_btn li i{
+  position: absolute;
+  bottom: -18px;
+  right: 0;
+  color: #fff;
+  background-color: #409eff;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: center;
+  width: 84px;
+  height: 30px;
+  font-style: normal;
+  border-radius: 5%;
+
+}
+.list_tag{
+  width: 33%;
+  float: right;
+  margin-top: 20px;
+}
+.text {
+  font-size: 14px;
+}
+
+.item {
+  margin-bottom: 18px;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both
+}
+.el-dialog__header{
+  padding: 0 !important;
+}
+.box-card {
+  width: 100%;
+}
+.btn1{
+  position: absolute !important;
+  top: 15px;
+  left: 15px;
+}
+.btn4{
+  position: absolute !important;
+  top: 15px;
+  left: 120px;
+}
+.btn5{
+  position: absolute !important;
+  top: 15px;
+  left: 293px;
+}
+.btn2{
+  position: absolute !important;
+  top: 15px;
+  left: 452px;
+}
+.btn3{
+  position: absolute !important;
+  top: 15px;
+  left: 579px;
+  width: 116px !important;
+}
+.btn3 input{
+  height: 35px !important;
+}
+.btn6{
+  position: absolute !important;
+  top: 15px;
+  left: 740px;
+  width: 163px !important;
+}
+.dialog{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.5);
+  z-index: 9999;
+}
+.dialog ul{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  list-style: none;
+  padding: 0;
+  overflow-y: scroll;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  
+}
+.dialog ul::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}
+.dialog ul li{
+  width:500px;
+  height:100px;
+  background:rgba(241,241,241,1);
+  line-height: 100px;
+  text-align: center;
+  font-size:30px;
+  font-family:Source Han Sans CN;
+  font-weight:500;
+  color:rgba(64,64,64,1);
+  margin-top: 6px;
+  margin-top:30px;
+  float: left;
+  margin-left: 100px;
+  cursor: pointer;
+}
+.dialog ul li:hover{
+  width:530px;
+  height:100px;
+  background:rgba(234,154,36,1);
+  /* box-shadow:5px 5px 5px 0px rgba(0, 0, 0, 0.4); */
+  box-shadow: 0 0 20px 2px #918f8f;
+  transition: all 0.5s;/*持续时间*/
+  font-size:32px;
+  font-family:Source Han Sans CN;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+  text-align: center;
+  line-height: 100px;
+}
+.dialog ul .active{
+  width:530px;
+  height:100px;
+  background:rgba(234,154,36,1);
+  /* box-shadow:5px 5px 5px 0px rgba(0, 0, 0, 0.4); */
+  box-shadow: 0 0 20px 2px #918f8f;
+  transition: all 0.5s;/*持续时间*/
+  font-size:32px;
+  font-family:Source Han Sans CN;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+  text-align: center;
+  line-height: 100px;
+}
+.inputBtnList{
+  margin: 30px auto 0;
+  width: 400px;
+  height: 300px;
+  box-sizing: border-box;
+}
+
+.inputBtnList button{
+  width: 25%;
+  height: 50px;
+  margin-top: 10px;
+  margin-right: 10px;
+  /*background-color: transparent*/
+}
+.inputBtnList button:first-child{
+  margin-left: 10px;
+}
+.el-alert{
+  display: block !important;
+}

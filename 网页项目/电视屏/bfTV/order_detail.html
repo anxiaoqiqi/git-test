@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>订单回执单</title>
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+		<style>
+			body,
+			p {
+				margin: 0;
+				line-height: 1;
+			}
+
+			.order_top {
+				background: linear-gradient(90deg, #FF5223 0%, #FF4240 100%);
+				padding: 15px 0.9375rem;
+				color: #fff;
+			}
+
+			.order_back {
+				font-size: 1.125rem
+			}
+
+			.order_sn {
+				font-size: 0.75rem;
+				padding-top: 10px;
+			}
+
+			.order_phone {
+				display: inline-block;
+				padding-left: 0.625rem;
+			}
+
+			.order_content {
+				padding: 0.9375rem;
+			}
+
+			.order_address {
+				font-size: 0.875rem;
+			}
+
+			.order_custom {
+				padding-bottom: 10px;
+			}
+
+			.order_title {
+				font-weight: bold;
+				font-size: 1rem;
+				padding-top: 20px;
+			}
+
+			.order_list {
+				margin-top: 20px;
+			}
+
+			.product_list {
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.shop-lt {
+				display: flex;
+				font-size: 0.75rem;
+			}
+
+			.shop-img {
+				width: 5.625rem;
+				height: 5.625rem;
+				border-radius: 0.3125rem;
+			}
+
+			.shop-detail {
+				flex: 1;
+				margin-left: 0.625rem;
+			}
+
+			.shop-name {
+
+				font-size: 0.75rem;
+				padding: 0;
+				-webkit-line-clamp: 2;
+				line-clamp: 2;
+
+			}
+
+			.shop-special {
+				font-size: 0.75rem;
+				color: #808080;
+				padding-top: 10px;
+			}
+
+
+			.shop_num {
+				color: #808080;
+				padding-top: 10px;
+				text-align: right;
+			}
+
+			.shop_rt {
+				font-size: 0.625rem;
+				padding-left: 0.625rem;
+			}
+
+			.pay_freight {
+				display: flex;
+				justify-content: space-between;
+				font-size: 0.875rem;
+				padding-top: 10px;
+			}
+
+			.pay_account {
+				display: flex;
+				justify-content: space-between;
+				font-size: 1rem;
+				padding-top: 30px;
+			}
+
+			.pay_money {
+				color: #FF4240;
+				font-weight: bold;
+			}
+
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="order_top" v-if="orderDetail.orderForm">
+				<p class="order_back">订单回执</p>
+				<p class="order_sn">订单编号：{{orderDetail.orderForm.ordSn}}</p>
+				<p class="order_sn">下单时间：{{orderDetail.orderForm.createdAt}}</p>
+			</div>
+			<div class="order_content">
+				<div class="order_address" v-if="showAddress">
+					<p class="order_custom">收件人：{{consignee}}<span class="order_phone">{{mobilePhone}}</span></p>
+					<p class="order_custom">地&nbsp;&nbsp;&nbsp;址：{{addressMsg}}</p>
+				</div>
+				<div class="order_pro">
+					<p class="order_title">订单商品：</p>
+					<div class="order_list" v-for="(item,index) in orderDetail.orderProductList" :key="index">
+						<div class="product_list">
+							<div class="shop-lt">
+								<img class="shop-img"
+									:src="item.product.showCase?item.product.showCase:imgServerUrl+'storeDefault.png'" />
+								<div class="shop-detail">
+									<p class="shop-name">{{item.product.specifications}}</p>
+									<p class="shop-special" v-if="item.product.name">{{item.product.name}}</p>
+								</div>
+							</div>
+							<div class="shop_rt">
+								<p class="order_price">
+									￥{{item.orderDetails.beforeProviderCutEstimatedPrice?item.orderDetails.beforeProviderCutEstimatedPrice:item.orderDetails.originalPrice}}
+								</p>
+								<p class="shop_num">X{{item.dataNumber}}</p>
+							</div>
+						</div>
+
+						<div class="pay_freight">
+							<p>运费</p>
+							<p>￥{{item.orderDetails.freight}}</p>
+						</div>
+					</div>
+
+					<div class="pay_account" v-if="orderDetail.orderForm">
+						<p>合计</p>
+						<p class="pay_money">￥{{orderDetail.orderForm.performanceAmount}}</p>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+		<script src="./js/vue.min.js"> </script>
+		<script src="./js/jquery-3.4.1.min.js"></script>
+		<!-- 引入组件库 -->
+		<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+		<script>
+			$(function() {
+				const log = console.log.bind(console)
+				var app = new Vue({
+					el: '#app',
+					data: {
+						orderDetail: {},
+						customerId: '',
+						orderId: '',
+						programType: '',
+						startUrl: 'https://qinfuji.com/api-RibbonManager',
+						imgServerUrl: 'https://suki-image.qinfuji.com/staticImage/ServiceProvider/',
+						addressMsg: '',
+						consignee: '',
+						mobilePhone: '',
+						showAddress: false
+
+					},
+					mounted() {
+						this._main()
+					},
+					methods: {
+						_main() {
+							let that = this
+							console.log(window.location.search)
+							let dz_url = window.location.href.split("?")
+							if (dz_url.length > 1) {
+								var opt = decodeURIComponent(dz_url[1]);
+								var cs_arr = opt.split('&'); //参数字符串分割为数组
+								var cs = {};
+								for (var i = 0; i < cs_arr.length; i++) { //遍历数组，拿到json对象
+									cs[cs_arr[i].split('=')[0]] = cs_arr[i].split('=')[1]
+								}
+								if (cs.customerId) {
+									this.customerId = cs.customerId;
+									this.orderId = cs.id;
+									this.programType = cs.programType
+									that.getList();
+								} else {
+									that.$message('参数错误');
+								}
+							}else {
+								that.$message('参数错误');
+							}
+						},
+						getList() {
+							let that = this;
+							$.post(that.startUrl + "/small/order/selectOrderDetails", {
+								customerId: that.customerId,
+								id: that.orderId,
+								programType: that.programType
+							}, (res) => {
+								console.log(res)
+								if (res.code == 200) {
+									console.log('详情', res.data)
+									that.orderDetail = res.data
+									let orderReceivingAddress = that.orderDetail
+										.orderReceivingAddress
+									if (orderReceivingAddress) {
+										that.showAddress = true
+										let consignee = orderReceivingAddress.consignee.trim()
+										if (consignee.length > 0) {
+											consignee = consignee.substr(0, 1).concat("**");
+										}
+										let mobilePhone = orderReceivingAddress.mobilePhone
+											.trim()
+										if (mobilePhone.length > 0) {
+											mobilePhone = mobilePhone.substr(0, 3).concat("****",
+												mobilePhone.substr(7, 10));
+										}
+										that.consignee = consignee
+										that.mobilePhone = mobilePhone
+										that.addressMsg = orderReceivingAddress.province +
+											orderReceivingAddress.city + '****'
+
+									} else {
+										that.showAddress = false
+
+									}
+								} else {
+									that.$message(res.msg);
+								}
+							});
+						},
+					}
+				})
+			});
+		</script>
+	</body>
+
+</html>

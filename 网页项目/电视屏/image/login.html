@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .many_vertical {
+            width: 100%;
+            height: 100vh;
+            /* height: 2000px; */
+            /* background: pink; */
+            display: flex;
+            justify-content: center;
+            /* background-image: url(./img/back.png); */
+        }
+        .many_transverse{
+            width: 100%;
+            height: 100vh;
+            /* height: 2000px; */
+            /* background: pink; */
+            display: flex;
+            justify-content: center;
+        }
+        .many_pos {
+            /* position: relative; */
+            width: 100%;
+            /* height: 1820px; */
+            height: 100vh;
+        }
+
+        .many_pos img {
+            width: 100%;
+            /* height: 1820px; */
+            height: 100vh;
+
+        }
+        .switch{
+            background: url('https://suki-image.oss-cn-shenzhen.aliyuncs.com/sukiTV/switch.png')no-repeat;
+            width: 120px;
+            height: 48px;
+            background-size: 100% 100%;
+            position: absolute;
+            left: 3%;
+            top: 3%;
+            border: none;
+        }
+        .many_center {
+            position: absolute;
+            width: 880px;
+            height: 112px;
+            /* border: 1px solid rgba(204, 204, 204, 1); */
+            border-radius: 8px;
+            left: 50%;
+            top: 60%;
+            transform: translateX(-50%);
+            /* left: 50%; */
+        }
+        .el-select{
+            position: absolute;
+            width: 880px;
+            height: 112px;
+            left: 50%;
+            top: 44%;
+            transform: translateX(-50%);
+        }
+        .el-select .el-input{
+            width: 100%;
+            height: 100%;
+            font-size: 38px;
+            border:2px solid rgba(204,204,204,1);
+            border-radius:8px;
+            background-color: #ffffff;
+            color: #404040;
+            text-align: left;
+        }
+        .el-input__inner{
+            height: 100%;
+        }
+        .el-select .el-input .el-select__caret {
+            height: 100%;
+            width: 69px;
+            font-size: 40px;
+            text-align: center;
+            -webkit-transition: all .3s;
+            transition: all .3s;
+            line-height: 105px;
+        }
+        .el-select-dropdown__item{
+            height: 60px;
+            line-height: 60px;
+            font-size: 30px;
+        }
+        .many_center input {
+            border: 1px solid rgba(204, 204, 204, 1);
+            border-radius: 8px;
+            width: 880px;
+            height: 112px;
+            font-size: 40px;
+            text-indent: 15px;
+            font-weight: 400;
+            color: #404040;
+        }
+        .login_but {
+            bottom: 10%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 280px;
+            height: 80px;
+            background: #ea9a24;
+            color: #fff;
+            border: 0;  
+            font-size: 40px;
+            line-height: 40px;
+            border-radius: 8px;
+
+        }
+        .login_but img  {
+            width: 280px;
+            height: 80px;
+        }
+        [v-cloak] { display: none; }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 竖屏 -->
+        <div class="many_vertical" v-show="vertical">
+            <div class="many_pos">
+                <img src="https://suki-image.oss-cn-shenzhen.aliyuncs.com/sukiTV/loginback.png" alt="">
+                <!-- 切换 -->
+                <button class="switch" @click="switchClick"></button>
+                <div>
+                    <el-select v-model="region" placeholder="请选择类型">
+                        <el-option label="数据列表" value="1"></el-option>
+                        <el-option label="广告图" value="2"></el-option>
+                    </el-select>
+                </div>
+                <div class="many_center">
+                    <input type="text" placeholder="请输入门店号" v-model="storeNumber">
+                </div>
+                <button class="login_but" @click='logins' type="submit">
+                    <!-- <img src="./img/loginbut.png" alt=""> -->
+                    登录
+                </button>
+            </div>
+        </div>
+        <!-- 横屏 -->
+        <div class="many_transverse" v-show="transverse">
+            <div class="many_pos">
+                <img src="https://suki-image.oss-cn-shenzhen.aliyuncs.com/sukiTV/loginback_transverse.png" alt="">
+                <button class="switch"  @click="switchClick"></button>
+                <el-select v-model="region" placeholder="请选择类型">
+                    <el-option label="数据列表" value="1"></el-option>
+                    <el-option label="广告图" value="2"></el-option>
+                </el-select>
+                <div class="many_center">
+                    <input type="text" placeholder="请输入门店号" v-model="storeNumber">
+                </div>
+                <button class="login_but" @click='logins' type="submit">
+                    <!-- <img src="./img/loginbut.png" alt=""> -->
+                    登录
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="./js/vue.min.js"> </script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script>
+        $(function(){
+            const log = console.log.bind(console)
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'Hello Vue!',
+                    storeNumber: '',
+                    vertical:false,
+                    transverse:true,
+                    startUrl: 'https://qinfuji.com/api-RibbonManager',
+                    region:'',
+                },
+                mounted() {
+                    // this.logins()
+                },
+                methods: {
+                    switchClick(){
+                        let that = this
+                        if(that.vertical){
+                            that.vertical=false;
+                            that.transverse=true;
+                        }else{
+                            that.vertical=true;
+                            that.transverse=false;
+                        }
+
+                    },
+                    logins() {
+                        let that = this;
+                        if(that.storeNumber==''){
+                            that.$message('请输入门店号!');
+                            return
+                        }
+                        if(that.region==''){
+                            that.$message('请选择类型!');
+                            return
+                        }
+                        let data = {
+                            code: '013'
+                        }
+                        $.post(that.startUrl + "/small/distributor/findByCode",{
+                            code: that.storeNumber
+                        }, (data) => {
+                            log(data,'返回数据')
+                            if (data.code != 200) {
+                                that.$message(data.msg);
+                            } else {
+                                localStorage.setItem("name",data.data.name);
+                                localStorage.setItem('id', data.data.id)
+                                if(that.transverse){//横屏
+                                    console.log('是横屏')
+                                    if(that.region=='1'){//数据列表
+                                        window.location.href='./data_list_transverse.html'
+
+                                    }else{//广告图
+                                        window.location.href='./advertising_page_transverse.html'
+                                    }
+
+                                }else{//竖屏
+                                    console.log('是竖屏')
+                                    if(that.region=='1'){//数据列表
+                                        window.location.href='./data_list_vertical.html'
+
+                                    }else{//广告图
+                                        window.location.href='./advertising_page_vertical.html'
+
+                                    }
+
+                                }
+                            }
+                        });
+                    }
+                }
+            })   
+        });
+    </script>
+</body>
+
+</html>

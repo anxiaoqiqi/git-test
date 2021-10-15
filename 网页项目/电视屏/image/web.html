@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+    <title>花匙官网</title>
+    <style>
+        .view_big {
+            width: 100vw;
+            /* height: 130vh; */
+            /* background: palegreen; */
+        }
+
+        .top_img img {
+            width: 100%;
+            min-height: 80px
+        }
+
+        .top_img {
+            font-size: 0;
+        }
+
+        .top_logs {
+            font-size: 0;
+        }
+
+        .top_logs img {
+            width: 100%;
+            min-height: 50px
+        }
+
+        .center_swiper {
+            width: 100%;
+            height: auto;
+            /* margin-top: 50px; */
+            /* background: salmon; */
+        }
+
+        .swiper-container {
+            width: 100%;
+           min-height: 600px !important;
+        }
+        .swiper-wrapper {
+            min-height: 600px !important;
+        }
+        .swiper-slide .swiper-slide-active {
+            min-height: 600px !important;
+        }
+
+        .swiper-slide {
+            min-height: 600px !important;
+            font-size: 0;
+            /* margin-top: 5px; */
+            /* display: flex;
+            justify-content: space-around; */
+            /* background: lightblue; */
+        }
+
+        .swiper-slide img {
+            min-height: 600px !important;
+            width: 100% !important;
+            /* margin-top: 5px; */
+            /* display: flex;
+            justify-content: space-around; */
+            /* background: lightblue; */
+        }
+        .foot-bottom {
+            font-size: 0;
+           
+        }
+        .foot-bottom img {
+            width: 100vw;
+            min-height: 40px
+            /* height: 350px; */
+        }
+        .bottom_flex {
+            width: 670px;
+            position: relative;
+            left: 47%;
+            margin-top: 50px;
+        }
+        .bottom_one {
+            float: right;
+            /* height: 50px; */
+        }
+        .bottom_one a {
+            text-decoration:none; out-line: none;color: #333;
+            font-size: 14px;
+            color: #555555;
+        }
+        .bottom_two {
+            float: right;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #555555;
+        }
+        body {
+            margin: 0;
+            overflow:-Scroll;overflow-x:hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="view_big">
+            <div class="top_img">
+                <img src="./img/toppc.png" alt="">
+            </div>
+            <div class="top_logs" @click='goRouter'>
+                <img src="./img/topLog.png" alt="">
+            </div>
+            <div class="center_swiper">
+                <div id="swpier-once" class="swiper-container">
+                    <div class="swiper-wrapper" @click='goRouter'>
+                        <div class="swiper-slide">
+                            <img src="./img/centerOne.png" alt="">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="./img/centerTwo.png" alt="">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="./img/centerThree.png" alt="">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="foot-bottom">
+                <img src="./img/bottompc.png" alt="">
+            </div>
+            <div class="bottom_flex">
+                    <div class="bottom_one"><a href="http://beian.miit.gov.cn/publish/query/indexFirst.action">湘ICP备20007821号-1 </a></div>
+                    <div class="bottom_two">国家药监局提示您：请正确认识化妆品功效，化妆品不能替代药品，不能治疗皮肤病等疾病</div>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/swiper/js/swiper.min.js"> </script>
+    <!-- http://192.168.1.117:20003/api-RibbonManager/ -->
+    <script src="./js/vue.min.js"> </script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script>
+        const log = console.log.bind(console)
+        var app = new Vue({
+            el: '#app',
+            data: {
+                swiper: {}
+            },
+            mounted() {
+                this.name();
+            },
+            methods: {
+                name() {
+                    let that = this
+                    that.swiper = new Swiper('#swpier-once', {
+                        // direction: 'vertical',
+                        // watchOverflow: true,//因为仅有1个slide，swiper无效
+                        // // loop: true,
+                        // observer: true,
+                        // slidesPerView: 3,
+                        // loopAdditionalSlides: 6,
+                        // spaceBetween: 10,
+                        loop: true,
+                        autoplay: {
+                            delay: 5000,
+                            stopOnLastSlide: false,
+                            disableOnInteraction: false,
+                        },
+
+                        pagination: {
+                            el: '.swiper-pagination',
+                            clickable: true,
+                        },
+                    });
+                },
+                goRouter() {
+                    window.location.href = 'https://huashihzp.tmall.com/shop/view_shop.htm?spm=a220m.1000862.1000730.2.6251640dvGdxu1&user_number_id=2207973235657&rn=50e8c0e2c97d2d6c0c7a1f6a5d2777df'
+                },
+            },
+        })
+    </script>
+</body>
+
+</html>

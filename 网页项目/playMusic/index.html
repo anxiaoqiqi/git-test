@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>语音播报</title>
+    <link rel="stylesheet" href="css/index.css?version=1.0.0">
+    <!-- 移动端适配 -->
+    <script>
+        var html = document.querySelector('html');
+        changeRem();
+        window.addEventListener('resize', changeRem);
+
+        function changeRem() {
+            var width = html.getBoundingClientRect().width;
+            html.style.fontSize = width / 10 + 'px';
+        }
+    </script>
+</head>
+
+<body>
+<div id="wrap">
+  <!-- <audio src="http://192.168.10.47:20003/api-RibbonManager/pay/audio/1234.mp3" controls="controls" loop="loop" autoplay="autoplay"></audio> -->
+  <el-button size="medium" class="btn1" @click="logins">手动刷新</el-button>
+  <el-button size="medium" class="btn4" @click="openPhone">自定义尾号播放</el-button>
+  <el-button size="medium" class="btn5" @click="openDistributorNumber">选择门店</el-button>
+  <el-checkbox v-model="checked" label="自动刷新" border size="medium" class="btn2"></el-checkbox>
+  <el-input v-model="number" placeholder="刷新时间" type="number" class="btn3"></el-input>
+  <el-checkbox v-model="orderStatus" label="开启虚拟订单数据" border size="medium" class="btn6"></el-checkbox>
+  <div class="main">
+    <ul class="list_btn">
+      <li v-for="(item, index) in listCard" :key="index">{{item.phoneMantissa}}
+        <span @click="play(item)" >播 放</span>
+        <i @click="open(item)">详 情</i>
+      </li>
+    </ul>
+    <div class="list_tag">
+      <el-card class="box-card">
+        <div v-for="(item, index) in pickedUpList" :key="index" class="text item">
+          <el-alert
+            :title="'待取货:'+item.phoneMantissa"
+            :description="'名称：'+item.receiverName+' 手机号：'+item.phone+' 订单编号：'+item.ordSn"
+            type="success"
+            @close="closeList(item)"
+            effect="dark">
+          </el-alert>
+        </div>
+      </el-card>
+    </div>
+
+  </div>
+  
+  <div id="audio_list">
+      
+  </div>
+  <el-dialog
+    title="选择订单进行语音播报"
+    :visible.sync="centerDialogVisible"
+    width="30%"
+    center>
+    <div>
+      <el-radio-group v-model="radio" size="medium">
+        <el-radio :label="item.ordSn" border v-for="(item, index) in pickUpOrder" :key="index" style="margin: 10px 0 0 0;">名称：{{item.receiverName}}， 电话：{{item.phone}}， 订单编号：{{item.ordSn}}</el-radio>
+      </el-radio-group>
+    </div>
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="centerDialogVisible = false">取 消</el-button>
+      <el-button type="primary" @click="saveData()">确 定</el-button>
+    </span>
+  </el-dialog>
+  <!-- 门店列表 -->
+  <div class="dialog" v-show="chooseList">
+    <ul>
+      <li v-for="(item, index) in listData" :key="index" v-on:touchstart="addActive($event)" v-on:touchend="removeActive($event)" @click="getPicture(item)" v-cloak>{{item.name}}</li>
+    </ul>
+  </div>
+  <!-- 输入手机尾号 -->
+  <el-dialog
+    title="输入手机尾号"
+    :visible.sync="phoneDialogVisible"
+    width="30%" style="font-size: 50px;" :close-on-click-modal="false"
+    center>
+    <div>
+      <el-input v-model="currentNumber" placeholder="请输入内容" type="number" style="width: 465px;"></el-input>
+    </div>
+    <div class="inputBtnList">
+      <el-button @click="traceNumber" v-for="(item, key) in buttons" :key = "key">{{item}}</el-button>
+    </div>
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="phoneDialogVisible = false">取 消</el-button>
+      <el-button type="primary" @click="savePhone()">确 定</el-button>
+    </span>
+  </el-dialog>
+</div>
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/vue.min.js"> </script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+function playTest(i,arr){
+    if(i==arr.length){
+      $("#audio_list").empty();
+      return false;
+    }
+    $("#audio_list").append("<audio id=\"audioList_"+i+"\" src="+arr[i]+"/>")
+    var tt=document.getElementById("audioList_"+i);
+    tt.play();
+    tt.addEventListener("ended",function(){
+      i++;
+      playTest(i,arr);
+    },false);
+}
+  var app = new Vue({
+        el: '#wrap',
+        data: {
+            listCard:[],
+            musicArr:[],
+            checked:false,
+            number:5,
+            // startUrl:"http://192.168.0.211:20003/api-RibbonManager/",
+            startUrl:"https://qinfuji.com/api-RibbonManager/",
+            distributorNumber:"",
+            pickedUpList:[],
+            pickUpOrder:[],
+            centerDialogVisible: false,
+            radio:"",
+            chooseList:false,
+            listData:[],
+            buttons: [1, 2, 3, 4, 5, 6, 7, 8, 9, '清空', 0, '删除'],
+            phoneDialogVisible:false,
+            currentNumber:"",
+            onlineId:"",
+            orderStatus:false,
+        },
+        watch:{
+          checked: {
+            handler(newVal, oldVal) {
+              if (newVal==true) {
+                this.ticker = setInterval(() => {
+                  setTimeout(() => {
+                  ///调取接口获取数据
+                    this.logins()
+                    this.queryList()
+                  }, 0)
+                }, this.number*1000)
+              }else{
+                clearInterval(this.ticker);
+              }
+            }
+          },
+          number:{
+            handler(newVal, oldVal) {
+              if (newVal!=oldVal) {
+                this.checked=false;
+              }
+            }
+          },
+          orderStatus:{
+            handler(newVal, oldVal) {
+              if (newVal!=oldVal) {
+                this.changeVirtualOrder()
+              }
+            }
+          }
+
+        },
+        mounted() {
+          this.openDistributorNumber()
+        },
+        methods: {
+            logins() {
+              let that = this;
+              $.post(that.startUrl + "youzhan/orderForm/youzan/tvBetakenPhone",{
+                "distributorNumber":that.distributorNumber
+              }, (data) => {
+                  if (data.code != 200) {
+                    that.$message.error("抱歉，网络异常！")
+                  } else {
+                    that.listCard=data.data
+                  }
+              });
+            },
+            play(item){
+              // let musicArr=["../music/tisi.wav","../music/frist.mp3"];
+              // for(let i=0;i<item.length;i++){
+              //   musicArr.push('../music/'+item[i]+'.mp3')
+              // }
+              // musicArr.push("../music/end.mp3")
+              let musicArr=['https://qinfuji.com/14430.mp3']
+              musicArr.push(this.startUrl+"pay/audio/"+item.phoneMantissa+".mp3")
+              playTest(0,musicArr)
+              // this.checked=false;
+              this.addList(item)
+
+
+              
+            },
+            open(item) {
+              let nameList=""
+              if(item.productNames&&item.productNames.length>1){
+                for(let i=0;i<item.productNames.length;i++){
+                  nameList+='<p>订单商品'+(i+1)+'：'+item.productNames[i]+"</p>";
+                }
+              }else{
+                nameList='<p>订单商品：'+item.productNames+"</p>"
+              }
+              this.$alert(
+                '<p>订单编号：'+item.ordSn+"</p>"+
+                '<p>电话：'+item.phone+"</p>"+
+                '<p>姓名：'+item.receiverName+"</p>"+nameList,
+                '详情信息', {
+                dangerouslyUseHTMLString: true,
+                confirmButtonText: '确定',
+                callback: action => {
+                }
+              });
+            },
+            openPhone(){
+              // this.$prompt('请输入手机尾号', '提示', {
+              //   confirmButtonText: '确定',
+              //   cancelButtonText: '取消',
+              //   inputPattern: /^[+]{0,1}(\d+)$/,
+              //   inputErrorMessage: '手机尾号格式不正确'
+              // }).then(({ value }) => {
+              //   let that = this;
+              //   $.post(that.startUrl + "youzhan/orderForm/youzan/FindYouZhanStoreOrder",{
+              //     "distributorNumber":that.distributorNumber,
+              //     "phone":value
+              //   }, (data) => {
+              //       if (data.code != 200) {
+              //         that.$message.error("抱歉，网络异常！")
+              //       } else {
+              //         if(data.data&&data.data.length==1){
+              //           that.play(data.data[0])
+              //         }else{
+              //           that.radio=""
+              //           that.pickUpOrder=data.data
+              //           that.centerDialogVisible=true
+              //         }
+              //       }
+              //   });
+
+              // }).catch(() => {
+                       
+              // });
+              this.phoneDialogVisible=true
+            },
+            savePhone(){
+              let that = this;
+                $.post(that.startUrl + "youzhan/orderForm/youzan/FindYouZhanStoreOrder",{
+                  "distributorNumber":that.distributorNumber,
+                  "phone":that.currentNumber
+                }, (data) => {
+                    if (data.code != 200) {
+                      that.$message.error("抱歉，网络异常！")
+                    } else {
+                      that.phoneDialogVisible=false
+                      if(data.data&&data.data.length==1){
+                        that.play(data.data[0])
+                      }else if(data.data&&data.data.length>1){
+                        that.radio=""
+                        that.pickUpOrder=data.data
+                        that.centerDialogVisible=true
+                      }else if(data.data.length==0){
+                        this.$confirm('查询不到该手机尾号的订单, 是否强制播报?', '提示', {
+                          confirmButtonText: '确定',
+                          cancelButtonText: '取消',
+                          type: 'warning'
+                        }).then(() => {
+                          let musicArr=['https://qinfuji.com/14430.mp3']
+                          musicArr.push(this.startUrl+"pay/audio/"+that.currentNumber+".mp3")
+                          playTest(0,musicArr)
+                        }).catch(() => {
+                                 
+                        });
+                      }
+                    }        
+              });
+
+            },
+            openDistributorNumber(){
+              let that = this;
+              $.post(that.startUrl + "youzhan/orderForm/youzan/FindYouZhanStores",{}, (data) => {
+                  if (data.code != 200) {
+                      that.$message(data.msg);
+                  } else {
+                      that.listData=data.data
+                      that.chooseList=true;
+                  }
+              });
+            },
+            getPicture(item) {
+                let that = this;
+                that.distributorNumber=item.id;
+                that.onlineId=item.onlineId;
+                that.chooseList=false;
+                that.checked=true
+                that.logins();
+                that.queryList();
+                that.getVirtualOrder();
+
+            },
+            //查询列表
+            queryList() {
+              let that = this;
+              $.post(that.startUrl + "youzhan/orderForm/youzan/getNoticeYouZanTvBetaken",{
+                "distributorNumber":that.distributorNumber
+              }, (data) => {
+                  if (data.code != 200) {
+                    that.$message.error("抱歉，网络异常！")
+                  } else {
+                    this.$nextTick(()=>{
+                      that.pickedUpList=data.data
+                    })
+                    
+                  }
+              });
+            },
+            //保存
+            saveData(){
+              let that = this;
+              if(!that.radio){
+                that.$message.error("请选择一条数据！")
+                return
+              }
+              for(let i=0;i<that.pickUpOrder.length;i++){
+                if(that.pickUpOrder[i].ordSn==that.radio){
+                  that.play(that.pickUpOrder[i])
+                  that.centerDialogVisible=false
+                }
+              }
+
+            },
+            //新增列表
+            addList(item) {
+              let that = this;
+              $.post(that.startUrl + "youzhan/orderForm/youzan/addNoticeYouZanTvBetaken",{
+                "distributorNumber":that.distributorNumber,
+                "oderSn":item.ordSn,
+                "phone":item.phone,
+                "receiverName":item.receiverName,
+              }, (data) => {
+                  if (data.code != 200) {
+                    that.$message.error("抱歉，网络异常！")
+                  } else {
+                    that.queryList()
+                  }
+              });
+            },
+            //删除
+            closeList(item){
+              let that = this;
+              $.post(that.startUrl + "youzhan/orderForm/youzan/deleteYouZhanStoreOrder",{
+                "distributorNumber":that.distributorNumber,
+                "ordSn":item.ordSn,
+              }, (data) => {
+                  if (data.code != 200) {
+                    that.$message.error("抱歉，网络异常请重试！")
+                  } else{
+                    that.queryList()
+
+                  }
+              });
+
+            },
+            traceNumber: function(event){
+                const btnText = event.target.textContent
+                if(btnText === '清空'){
+                    this.currentNumber = ''
+                }else if(btnText === '删除'){
+                    this.currentNumber = this.currentNumber.substring(0, this.currentNumber.length -1)
+                }else{
+                    this.currentNumber += btnText
+                }
+            },
+            // 获取有赞门店是否开启虚拟订单数据
+            getVirtualOrder(){
+              let that = this;
+              $.post(that.startUrl + "youzhan/orderForm/youzan/fictitiousap",{
+                "distributorNumber":that.onlineId
+              }, (data) => {
+                  if (data.code != 200) {
+                    that.$message.error("抱歉，网络异常！")
+                  } else {
+                    that.orderStatus=data.data
+                  }
+              });
+            },
+            // 设置有赞门店是开启关闭虚拟订单数据
+            changeVirtualOrder(){
+              let that = this;
+              $.post(that.startUrl + "youzhan/orderForm/youzan/updateYouZhanFictitiousap",{
+                "distributorNumber":that.onlineId,
+                "value":that.orderStatus
+              }, (data) => {
+                  if (data.code != 200) {
+                    that.$message.error("抱歉，网络异常！")
+                  } else {
+                    that.orderStatus=data.data
+                  }
+              });
+            },
+        }
+    })   
+</script>
+</body>
+</html>

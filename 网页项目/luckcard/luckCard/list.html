@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>幸运卡牌</title>
+    <link rel="stylesheet" href="../common/css/common_mobile.css?version=1.0.0">
+    <link rel="stylesheet" href="css/list.css?version=1.0.0">
+    <!-- 移动端适配 -->
+    <script>
+        var html = document.querySelector('html');
+        changeRem();
+        window.addEventListener('resize', changeRem);
+
+        function changeRem() {
+            var width = html.getBoundingClientRect().width;
+            html.style.fontSize = width / 10 + 'px';
+        }
+    </script>
+</head>
+<body>
+  <div id="wrap" style="background-color: #2F035A;">
+    <div class="all">
+      <div class="head">
+        <p>中奖记录</p>
+        <span @click="back">领劵中心</span>
+      </div>
+      <div class="content">
+        <ul class="listCard" v-if="listCard.length>0">
+          <!-- <li v-for="(item, index) in listCard" :key="index">
+            <div class="left_div">
+              <p>¥ <span>{{item.deductionMargin}}</span></p>
+              <h4>满{{item.moneyAmount}}元可使用</h4>
+              <i></i>
+            </div>
+            <div class="right_div">
+              <h4>{{item.name}}</h4>
+              <p>有限效期:{{item.termOfValidity}}天</p>
+              <p>生效日期:{{item.startDate}}-{{item.endDate}}</p>
+            </div>
+            <span class="btn">2张</span>
+          </li> -->
+          <li v-for="(item, index) in listCard" :key="index">
+            <div class="left_div"><i style="width: 15px;
+              height: 15px;
+              background: #fff;
+              border-radius: 50%;
+              left: -8px;
+              top: 50%;
+              transform: translateY(-50%);
+              position: absolute;"></i></div>
+            <div class="right_div">
+              <h4>{{item.drawSettingsDetailsName}}</h4>
+              <p>中奖时间:{{item.createdAt}}</p>
+            </div>
+          </li>
+        </ul>
+        <p v-else class="no_more">暂无数据</p>
+      </div>
+    </div>
+    <!--错误提示弹窗-->
+    <div id="error_rule">
+      <div class="error_mark">
+        <p></p>
+      </div>
+
+    </div>
+  </div>
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/vue.min.js"> </script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+<script>
+  var app = new Vue({
+        el: '#wrap',
+        data: {
+            listCard:[],
+            message: 'Hello Vue!',
+            startUrl: 'https://www.suki.shop/api-RibbonManager',
+            // startUrl: 'http://wtofly.natapp1.cc/api-RibbonManager',
+            id:"",//0c4178b30ae1465ea34f13bd5423dbf7
+            customer:"",//1586484031408409535041114112
+            parentId:"",
+            programType:"",//{fenxiao}
+        },
+        mounted() {
+          let dz_url = window.location.href.split("?")
+          if(dz_url.length>1){
+             var opt = decodeURIComponent(dz_url[1]);
+             var cs_arr = opt.split('&');                         //参数字符串分割为数组
+             var cs={};
+             for(var i=0;i<cs_arr.length;i++){         //遍历数组，拿到json对象
+                 cs[cs_arr[i].split('=')[0]] = cs_arr[i].split('=')[1]
+             }
+            this.id = cs.id; 
+            this.customer = cs.customer; 
+            this.parentId = cs.parentId; 
+            this.programType =cs.programType
+            this.logins()
+          };
+        },
+        methods: {
+            logins() {
+              let that = this;
+              $.post(that.startUrl + "/drawSettingsLuckDraw/recordList",{
+                drawSettingsId: that.id,
+                customerId:that.customer
+              }, (data) => {
+                  if (data.code != 200) {
+                    that.listCard=[]
+                    $("#error_rule").show();
+                    setTimeout(function(){$("#error_rule").hide()},2000);
+                    $(".error_mark p").html(data.msg)
+                  } else {
+                    that.listCard=data.data
+                  }
+              });
+            },
+            back(){
+              wx.miniProgram.navigateTo({url: '/pages/orderPackages/couponCenter/main'})
+            },
+        }
+    })   
+</script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>幸运卡牌</title>
+    <link rel="stylesheet" href="../common/css/swiper.min.css">
+    <link rel="stylesheet" href="../common/css/common_mobile.css?version=1.0.0">
+    <link rel="stylesheet" href="css/index.css?version=1.0.0">
+    <!-- 移动端适配 -->
+    <script>
+        var html = document.querySelector('html');
+        changeRem();
+        window.addEventListener('resize', changeRem);
+
+        function changeRem() {
+            var width = html.getBoundingClientRect().width;
+            html.style.fontSize = width / 10 + 'px';
+        }
+    </script>
+</head>
+
+<body>
+<div id="wrap">
+    <p class="rule fl" @click="goHistory">中奖记录</p>
+    <span  @click="goMy" id="myWin" class="my fr">我的</span>
+    <!--游戏区域-->
+    <div class="main">
+        <!-- <h2>已有 <span id="change"> 5 </span> 人参与</h2> -->
+        <ul class="box">
+            <li class="animate1">
+                <img src="image/pattern1.png">
+            </li>
+            <li class="animate2">
+                <img src="image/pattern2.png">
+            </li>
+            <li class="animate3">
+                <img src="image/pattern3.png">
+            </li>
+            <li class="animate4">
+                <img src="image/pattern4.png">
+            </li>
+            <li class="animate5">
+                <img src="image/pattern1.png">
+            </li>
+            <li>
+                <img src="image/pattern2.png">
+            </li>
+        </ul>
+        <!--奖品展示-->
+        <div class="awards">
+            <div class="swiper-container">
+                <ul class="swiper-wrapper">
+                    <li v-for="(item, index) in list" :key="index" class="swiper-slide">
+                      <img :src="item.showImg" style="border-radius: 20px;">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="mask-card"></div>
+    <!--游戏规则弹窗-->
+    <div id="mask-rule">
+        <div class="box-rule">
+            <span class="star"></span>
+            <h2>活动规则说明</h2>
+            <span id="close-rule"></span>
+            <div class="con">
+                <div class="text">
+                    <p>id:{{id}}</p>
+                    <p>customer:{{customer}}</p>
+                    <p>parentId:{{parentId}}</p>
+                    <p>programType:{{programType}}</p>
+                    <p>活动规则说明活动规则说明活动规则说明活动规则说明活动规则说明活动规则说明</p>
+                    <p>活动规则说明活动规则说明活动规则说明活动规则说明活动规则说明活动规则说明</p>
+                    <p>活动规则说明活动规则说明活动规则说明活动规则说明活动规则说明活动规则说明</p>
+                    <p>活动规则说明活动规则说明活动规则说明活动规则说明活动规则说明活动规则说明</p>
+                    <p>活动规则说明活动规则说明活动规则说明活动规则说明活动规则说明活动规则说明</p>
+                    <p>活动规则说明活动规则说明活动规则说明活动规则说明活动规则说明活动规则说明</p>
+                    <p>活动规则说明活动规则说明活动规则说明活动规则说明活动规则说明活动规则说明</p>
+                    <p>活动规则说明活动规则说明活动规则说明活动规则说明活动规则说明活动规则说明</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--中奖提示-->
+    <div id="mask">
+        <div class="blin"></div>
+        <div class="caidai"></div>
+        <div class="winning">
+            <div class="red-head"></div>
+            <div class="red-body"></div>
+            <div id="card">
+              <a href="" target="_self" class="win"></a>
+            </div>
+            <span  href="" @click="goList" target="_self" class="btn"></span>
+            <span id="close"></span>
+        </div>
+    </div>
+    <!--错误提示弹窗-->
+    <div id="error_rule">
+      <div class="error_mark">
+        <p></p>
+      </div>
+
+    </div>
+    <!-- 优惠卷列表 -->
+    <div class="list_mark" v-show="cardShow">
+        <div class="all">
+          <div class="head">
+            <p>奖品展示<i @click="close"></i></p>
+          </div>
+          <div class="content">
+            <ul class="listCard">
+              <!-- <li v-for="(item, index) in listCard" :key="index">
+                <div class="left_div">
+                  <p>¥ <span>{{item.deductionMargin}}</span></p>
+                  <h4>满{{item.moneyAmount}}元可使用</h4>
+                  <i style="width: 15px;
+                  height: 15px;
+                  background: #fff;
+                  border-radius: 50%;
+                  left: -8px;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  position: absolute;"></i>
+                </div>
+                <div class="right_div">
+                  <h4>{{item.name}}</h4>
+                  <p>有限效期:{{item.termOfValidity}}天</p>
+                  <p>生效日期:{{item.startDate}}-{{item.endDate}}</p>
+                </div>
+                <span class="btn">2张</span> 
+              </li> -->
+              <li>
+                <div class="left_div"><i style="width: 15px;
+                  height: 15px;
+                  background: #fff;
+                  border-radius: 50%;
+                  left: -8px;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  position: absolute;"></i></div>
+                <div class="right_div">
+                  <h4>{{listCard.drawSettingsDetailsName}}</h4>
+                  <p>中奖时间:{{listCard.createdAt}}</p>
+                </div>
+                
+              </li>
+            </ul>
+            <!-- <p v-else class="no_more">暂无数据</p> -->
+          </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/swiper.jquery.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+<script src="js/vue.min.js"> </script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+<script src="js/index.js?version=1.0.0"></script>
+<script src="js/indexVue.js"></script>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+     <!-- 移动端适配 -->
+     <script>
+        var html = document.querySelector('html');
+        changeRem();
+        window.addEventListener('resize', changeRem);
+
+        function changeRem() {
+            var width = html.getBoundingClientRect().width;
+            html.style.fontSize = width / 10 + 'px';
+        }
+    </script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .many_vertical {
+            width: 100%;
+            height: 100vh;
+            /* height: 2000px; */
+            /* background: pink; */
+            display: flex;
+            justify-content: center;
+            /* background-image: url(./img/back.png); */
+        }
+        .many_transverse{
+            width: 100%;
+            height: 100vh;
+            /* height: 2000px; */
+            /* background: pink; */
+            display: flex;
+            justify-content: center;
+        }
+        .many_pos {
+            /* position: relative; */
+            width: 100%;
+            /* height: 1820px; */
+            height: 100vh;
+        }
+
+        .many_pos img {
+            width: 100%;
+            /* height: 1820px; */
+            height: 100vh;
+
+        }
+        .switch{
+            font-size: 32px;
+            color: #b2b2b2;
+            border: #b2b2b2 solid 2px;
+            text-align: center;
+            border-radius: 13px;
+            line-height: 48px;
+            width: 258px;
+            height: 54px;
+            background-size: 100% 100%;
+            position: absolute;
+            left: 3%;
+            top: 3%;
+        }
+        .bf{
+            font-size: 32px;
+            color: #b2b2b2;
+            border: #b2b2b2 solid 2px;
+            text-align: center;
+            border-radius: 13px;
+            line-height: 48px;
+            width: 258px;
+            height: 54px;
+            background-size: 100% 100%;
+            position: absolute;
+            right: 3%;
+            top: 3%;
+        }
+        .many_center {
+            position: absolute;
+            width: 880px;
+            height: 112px;
+            /* border: 1px solid rgba(204, 204, 204, 1); */
+            border-radius: 8px;
+            left: 50%;
+            top: 44%;
+            transform: translateX(-50%);
+            /* left: 50%; */
+        }
+        .el-select{
+            position: absolute;
+            width: 880px;
+            height: 112px;
+            left: 50%;
+            top: 43%;
+            transform: translateX(-50%);
+            font-size: 36px;
+        }
+        .el-select select{
+            width: 100%;
+            height: 100%;
+            font-size: 38px;
+            border:2px solid rgba(204,204,204,1);
+            border-radius:8px;
+            background-color: #ffffff;
+            color: #404040;
+            text-align: left;
+            text-indent: 10px;
+        }
+        .el-input__inner{
+            height: 100%;
+        }
+        .el-select .el-input .el-select__caret {
+            height: 100%;
+            width: 69px;
+            font-size: 40px;
+            text-align: center;
+            -webkit-transition: all .3s;
+            transition: all .3s;
+            line-height: 105px;
+        }
+        .el-select-dropdown__item{
+            height: 60px;
+            line-height: 60px;
+            font-size: 30px;
+        }
+        .many_center input {
+            border: 1px solid rgba(204, 204, 204, 1);
+            border-radius: 8px;
+            width: 880px;
+            height: 112px;
+            font-size: 40px;
+            text-indent: 15px;
+            font-weight: 400;
+            color: #404040;
+        }
+        .login_but1 {
+            bottom: 15%;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0); 
+            width: 280px;
+            height: 80px;
+            background: #fff;
+            color: black;
+            border: 0;  
+            font-size: 38px;
+            line-height: 40px;
+            border-radius: 8px;
+        }
+        .login_but2 {
+            bottom: 10%;
+            position: absolute;
+            left: 55%;
+            width: 280px;
+            height: 80px;
+            background: #ea9a24;
+            color: #fff;
+            border: 0;  
+            font-size: 40px;
+            line-height: 40px;
+            border-radius: 8px;
+        }
+        .dialog{
+          position: fixed;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,.5);
+          z-index: 9999;
+        }
+        .dialog ul{
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          list-style: none;
+          padding: 0;
+          overflow-y: scroll;
+          margin: 0;
+          
+        }
+        .dialog ul::-webkit-scrollbar {
+          display: none; /* Chrome Safari */
+        }
+        .dialog ul li{
+          /* width:2rem; */
+          height:0.7rem;
+          padding: 0 0.1rem 0 0.1rem;
+          background:rgba(241,241,241,1);
+          line-height: 0.7rem;
+          text-align: center;
+          font-size:0.2rem;
+          font-family:Source Han Sans CN;
+          font-weight:500;
+          color:rgba(64,64,64,1);
+          margin-top: 0.06rem;
+          margin-top:0.2rem;
+          float: left;
+          margin-left: 0.5rem;
+          cursor: pointer;
+        }
+        .dialog ul li:hover{
+          height:0.7rem;
+          background:rgba(234,154,36,1);
+          /* box-shadow:5px 5px 5px 0px rgba(0, 0, 0, 0.4); */
+          box-shadow: 0 0 20px 2px #918f8f;
+          transition: all 0.5s;/*持续时间*/
+          font-size:0.22rem;
+          font-family:Source Han Sans CN;
+          font-weight:500;
+          color:rgba(255,255,255,1);
+          text-align: center;
+          line-height: 0.7rem;
+        }
+        .dialog ul .active{
+          height:0.7rem;
+          background:rgba(234,154,36,1);
+          /* box-shadow:5px 5px 5px 0px rgba(0, 0, 0, 0.4); */
+          box-shadow: 0 0 20px 2px #918f8f;
+          transition: all 0.5s;/*持续时间*/
+          font-size:0.22rem;
+          font-family:Source Han Sans CN;
+          font-weight:500;
+          color:rgba(255,255,255,1);
+          text-align: center;
+          line-height: 0.7rem;
+        }
+        [v-cloak] { display: none; }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 竖屏 -->
+        <!-- <div class="many_vertical" v-show="vertical">
+            <div class="many_pos">
+                <img src="https://suki-image.oss-cn-shenzhen.aliyuncs.com/sukiTV/loginback.png" alt="">
+                <button class="switch" @click="switchClick">{{switchName}}</button>
+                <button class="bf" @click="goBF">BoomFresh</button>
+                <div class="many_center">
+                    <input type="text" placeholder="请输入门店号" v-model="storeNumber">
+                </div>
+                <button class="login_but1" @click='logins1' type="submit">
+                    数据登录
+                </button>
+            </div>
+        </div> -->
+        <!-- 横屏 v-show="transverse" @click="switchClick"-->
+        <div class="many_transverse">
+            <div class="many_pos">
+                <img src="img/loginback_transverse.jpg" alt="">
+                <!-- <button class="switch">{{switchName}}</button>
+                <button class="bf" @click="goBF">SN·SUKI</button> -->
+                <!-- <div class="many_center">
+                    <input type="text" placeholder="请输入门店号" v-model="storeNumber">
+                </div> -->
+                <button class="login_but1" @click='logins1' type="submit">
+                    选择门店登录
+                </button>
+                <!-- <button class="login_but2" @click='logins2' type="submit">
+                    广告登录
+                </button> -->
+            </div>
+        </div>
+        <!-- 图片列表 -->
+        <div class="dialog" v-show="chooseList">
+          <ul>
+            <li v-for="(item, index) in listData" :key="index" v-on:touchstart="addActive($event)" v-on:touchend="removeActive($event)" @click="getPicture(item)" v-cloak>{{item.name}}</li>
+          </ul>
+        </div>
+    </div>
+    <script src="./js/vue.min.js"> </script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script>
+        $(function(){
+            const log = console.log.bind(console)
+            var app = new Vue({
+                el: '#app',
+                data: {
+                  // https://qinfuji.com/
+                    message: 'Hello Vue!',
+                    storeNumber: '',
+                    vertical:false,
+                    transverse:true,
+                    startUrl: 'https://qinfuji.com/api-RibbonManager/',
+                    // startUrl: 'http://192.168.0.211:20003/api-RibbonManager/',
+                    region:'',
+                    switchName:'当前模式：横屏',
+                    listData:[],
+                    chooseList:false,
+                },
+                mounted() {
+                    // this.logins()
+                },
+                methods: {
+                    switchClick(){
+                        let that = this
+                        if(that.vertical){
+                            that.switchName='当前模式：横屏'
+                            that.vertical=false;
+                            that.transverse=true;
+                        }else{
+                            that.switchName='当前模式：竖屏'
+                            that.vertical=true;
+                            that.transverse=false;
+                        }
+                    },
+                    goBF(){
+                      window.location.href='https://qinfuji.com/image/old.html'
+                    },
+                    logins1() {
+                        // let that = this;
+                        // $.post(that.startUrl + "youzhan/orderForm/youzan/FindYouZhanStores",{}, (data) => {
+                        //     log(data,'返回数据')
+                        //     if (data.code != 200) {
+                        //         that.$message(data.msg);
+                        //     } else {
+                        //         that.listData=data.data
+                        //         that.chooseList=true;
+                        //     }
+                        // });
+                       //数据列表
+                       window.location.href='./selectStore.html'
+                        
+                    },
+                    getPicture(item) {
+                        let that = this;
+                        localStorage.setItem('storeNumber', item.id)
+                        that.chooseList=false;
+                        //数据列表
+                        window.location.href='./data_list_transverse.html'
+                    }
+                }
+            })   
+        });
+    </script>
+</body>
+
+</html>

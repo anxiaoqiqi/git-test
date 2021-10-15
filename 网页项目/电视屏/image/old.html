@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .many_vertical {
+            width: 100%;
+            height: 100vh;
+            /* height: 2000px; */
+            /* background: pink; */
+            display: flex;
+            justify-content: center;
+            /* background-image: url(./img/back.png); */
+        }
+        .many_transverse{
+            width: 100%;
+            height: 100vh;
+            /* height: 2000px; */
+            /* background: pink; */
+            display: flex;
+            justify-content: center;
+        }
+        .many_pos {
+            /* position: relative; */
+            width: 100%;
+            /* height: 1820px; */
+            height: 100vh;
+        }
+
+        .many_pos img {
+            width: 100%;
+            /* height: 1820px; */
+            height: 100vh;
+
+        }
+        .switch{
+            font-size: 32px;
+            color: #b2b2b2;
+            border: #b2b2b2 solid 2px;
+            text-align: center;
+            border-radius: 13px;
+            line-height: 48px;
+            width: 258px;
+            height: 54px;
+            background-size: 100% 100%;
+            position: absolute;
+            left: 3%;
+            top: 3%;
+        }
+        .bf{
+            font-size: 32px;
+            color: #b2b2b2;
+            border: #b2b2b2 solid 2px;
+            text-align: center;
+            border-radius: 13px;
+            line-height: 48px;
+            width: 258px;
+            height: 54px;
+            background-size: 100% 100%;
+            position: absolute;
+            right: 3%;
+            top: 3%;
+        }
+        .many_center {
+            position: absolute;
+            width: 880px;
+            height: 112px;
+            /* border: 1px solid rgba(204, 204, 204, 1); */
+            border-radius: 8px;
+            left: 50%;
+            top: 44%;
+            transform: translateX(-50%);
+            /* left: 50%; */
+        }
+        .el-select{
+            position: absolute;
+            width: 880px;
+            height: 112px;
+            left: 50%;
+            top: 43%;
+            transform: translateX(-50%);
+            font-size: 36px;
+        }
+        .el-select select{
+            width: 100%;
+            height: 100%;
+            font-size: 38px;
+            border:2px solid rgba(204,204,204,1);
+            border-radius:8px;
+            background-color: #ffffff;
+            color: #404040;
+            text-align: left;
+            text-indent: 10px;
+        }
+        .el-input__inner{
+            height: 100%;
+        }
+        .el-select .el-input .el-select__caret {
+            height: 100%;
+            width: 69px;
+            font-size: 40px;
+            text-align: center;
+            -webkit-transition: all .3s;
+            transition: all .3s;
+            line-height: 105px;
+        }
+        .el-select-dropdown__item{
+            height: 60px;
+            line-height: 60px;
+            font-size: 30px;
+        }
+        .many_center input {
+            border: 1px solid rgba(204, 204, 204, 1);
+            border-radius: 8px;
+            width: 880px;
+            height: 112px;
+            font-size: 40px;
+            text-indent: 15px;
+            font-weight: 400;
+            color: #404040;
+        }
+        .login_but1 {
+            bottom: 10%;
+            position: absolute;
+            left: 30%;
+            width: 280px;
+            height: 80px;
+            background: #ea9a24;
+            color: #fff;
+            border: 0;  
+            font-size: 40px;
+            line-height: 40px;
+            border-radius: 8px;
+        }
+        .login_but2 {
+            bottom: 10%;
+            position: absolute;
+            left: 55%;
+            width: 280px;
+            height: 80px;
+            background: #ea9a24;
+            color: #fff;
+            border: 0;  
+            font-size: 40px;
+            line-height: 40px;
+            border-radius: 8px;
+        }
+        
+        [v-cloak] { display: none; }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 竖屏 -->
+        <div class="many_vertical" v-show="vertical">
+            <div class="many_pos">
+                <img src="https://suki-image.oss-cn-shenzhen.aliyuncs.com/sukiTV/loginback.png" alt="">
+                <!-- 切换 -->
+                <!-- <button class="switch" @click="switchClick">{{switchName}}</button>
+                <button class="bf" @click="goBF">BoomFresh</button> -->
+                <div class="many_center">
+                    <input type="text" placeholder="请输入门店号" v-model="storeNumber">
+                </div>
+                <button class="login_but1" @click='logins1' type="submit">
+                    数据登录
+                </button>
+                <button class="login_but2" @click='logins2' type="submit">
+                    广告登录
+                </button>
+            </div>
+        </div>
+        <!-- 横屏 -->
+        <div class="many_transverse" v-show="transverse">
+            <div class="many_pos">
+                <img src="https://suki-image.oss-cn-shenzhen.aliyuncs.com/sukiTV/loginback_transverse.png" alt="">
+                <!-- <button class="switch"  @click="switchClick">{{switchName}}</button>
+                <button class="bf" @click="goBF">BoomFresh</button> -->
+                <div class="many_center">
+                    <input type="text" placeholder="请输入门店号" v-model="storeNumber">
+                </div>
+                <button class="login_but1" @click='logins1' type="submit">
+                    数据登录
+                </button>
+                <button class="login_but2" @click='logins2' type="submit">
+                    广告登录
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="./js/vue.min.js"> </script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script>
+        $(function(){
+            const log = console.log.bind(console)
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'Hello Vue!',
+                    storeNumber: '',
+                    vertical:false,
+                    transverse:true,
+                    startUrl: 'https://qinfuji.com/api-RibbonManager',
+                    // startUrl: 'http://wtofly.natapp1.cc/api-RibbonManager',
+                    region:'',
+                    switchName:'当前模式：横屏'
+                },
+                mounted() {
+                  let dz_url = window.location.href.split("?")
+                  if(dz_url.length>1){
+                     var opt = decodeURIComponent(dz_url[1]);
+                     var cs_arr = opt.split('&');                    //参数字符串分割为数组
+                     var cs={};
+                     for(var i=0;i<cs_arr.length;i++){         //遍历数组，拿到json对象
+                         cs[cs_arr[i].split('=')[0]] = cs_arr[i].split('=')[1]
+                     }
+                  }
+                  if(cs.model=="transverse"){
+                    this.switchName='当前模式：横屏'
+                    this.vertical=false;
+                    this.transverse=true;
+
+                  }else if(cs.model=="vertical"){
+                    this.switchName='当前模式：竖屏'
+                    this.vertical=true;
+                    this.transverse=false;
+
+                  }
+                },
+                methods: {
+                    switchClick(){
+                        let that = this
+                        if(that.vertical){
+                            that.switchName='当前模式：横屏'
+                            that.vertical=false;
+                            that.transverse=true;
+                        }else{
+                            that.switchName='当前模式：竖屏'
+                            that.vertical=true;
+                            that.transverse=false;
+                        }
+                    },
+                    goBF(){
+                      window.location.href='https://qinfuji.com/bf-tv/'
+                    },
+                    logins1() {
+                        let that = this;
+                        if(that.storeNumber==''){
+                            that.$message('请输入门店号!');
+                            return
+                        }
+                        let data = {
+                            code: '013'
+                        }
+                        $.post(that.startUrl + "/small/distributor/findByCode",{
+                            code: that.storeNumber
+                        }, (data) => {
+                            log(data,'返回数据')
+                            if (data.code != 200) {
+                                that.$message(data.msg);
+                            } else {
+                                localStorage.setItem("name",data.data.name);
+                                localStorage.setItem('id', data.data.id);
+                                localStorage.setItem('serviceType', JSON.stringify(data.serviceType))
+                                localStorage.setItem('storeNumber', that.storeNumber)
+                                if(that.transverse){//横屏
+                                    console.log('是横屏')
+                                    //数据列表
+                                    window.location.href='./data_list_transverse.html'
+                                }else{//竖屏
+                                    console.log('是竖屏')
+                                    //数据列表
+                                    window.location.href='./data_list_vertical.html'
+                                }
+                            }
+                        });
+                    },
+                    logins2() {
+                        let that = this;
+                        if(that.storeNumber==''){
+                            that.$message('请输入门店号!');
+                            return
+                        }
+                        let data = {
+                            code: '013'
+                        }
+                        $.post(that.startUrl + "/small/distributor/findByCode",{
+                            code: that.storeNumber
+                        }, (data) => {
+                            log(data,'返回数据')
+                            if (data.code != 200) {
+                                that.$message(data.msg);
+                            } else {
+                                localStorage.setItem("name",data.data.name);
+                                localStorage.setItem('id', data.data.id)
+                                if(that.transverse){//横屏
+                                    console.log('是横屏')
+                                    //广告图
+                                    window.location.href='./advertising_page_transverse.html'
+                                }else{//竖屏
+                                    console.log('是竖屏')
+                                    //广告图
+                                    window.location.href='./advertising_page_vertical.html'
+                                }
+                            }
+                        });
+                    }
+                }
+            })   
+        });
+    </script>
+</body>
+
+</html>

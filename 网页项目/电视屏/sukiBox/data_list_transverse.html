@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:100,300,400,500,700,900">
+    <title>提货面板</title>
+    <!-- 移动端适配 -->
+    <script>
+      var html = document.querySelector('html');
+      changeRem();
+      window.addEventListener('resize', changeRem);
+
+      function changeRem() {
+          var width = html.getBoundingClientRect().width;
+          html.style.fontSize = width / 10 + 'px';
+      }
+  </script>
+    <style>
+        body {
+          margin: 0;
+        }
+
+        .many {
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            /* height: 2000px; */
+            /* background: pink; */
+            display: flex;
+            justify-content: center;
+            /* background-image: url(./img/back.png); */
+        }
+
+        .many_pos {
+            position: relative;
+            width: 100%;
+            /* height: 1820px; */
+            height: 100vh;
+            background-color: black;
+        }
+
+
+        .many_center_stores {
+            position: absolute;
+            /* width: 856px;
+            height: 108px; */
+            /* background: pink; */
+            right: 5%;
+            top: 6%;
+
+            /* transform: translateX(-50%); */
+            /* left: 50%; */
+        }
+
+        .stores_flex {
+            display: flex;
+            align-items: center;
+        }
+
+        .many_center_stores img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+
+        }
+
+        .stores_title {
+            font-size: 20px;
+            font-weight: 500;
+            height: 25px;
+            top: 20px;
+            color: #999999;
+        }
+
+        .main_center {
+          width: 100%;
+          margin: 0 auto 0;
+          /* height: 3.6rem; */
+          height:90%;
+        }
+
+        .many_center_two {
+            float: left;
+            width: 49.9%;
+            height: 100%;
+            overflow: hidden;
+            /* overflow-y: scroll; */
+            border-right: 0.02rem solid white;
+            /* left: 50%; */
+        }
+        .many_center_two::-webkit-scrollbar {
+          display: none; /* Chrome Safari */
+        }
+        .many_center_three {
+            width: 49.8%;
+            height: 100%;
+            float: left;
+            overflow: hidden;
+            background: url('img/order_bg.png')no-repeat;
+            background-size: 100% 100%;
+            /* border-bottom: 0.01rem solid white;
+            border-left: 0.01rem solid white; */
+            /* left: 50%; */
+        }
+        .title{
+          width: 100%;
+          margin: 0 auto;
+          height: 0.5rem;
+          overflow: hidden;
+        }
+        .many_center_two_title{
+            font-size: 0.39rem;
+            font-family: "Noto Sans SC";
+            /* font-weight: 500; */
+            color: rgba(249,249,249,1);
+            text-align: center;
+            line-height: 0.5rem;
+            width: 49.9%;
+            float: left;
+            background-color: #f25314;
+            cursor: pointer;
+            color: white;
+            text-align: center;
+            border-right: 0.02rem solid white;
+        }
+        .many_center_three_title{
+            font-size: 0.39rem;
+            font-family: "Noto Sans SC";
+            /* font-weight: 500; */
+            color: rgba(249,249,249,1);
+            text-align: center;
+            line-height: 0.5rem;
+            width: 49.8%;
+            float: left;
+            color: white;
+            text-align: center;
+            background-color: #f25314;
+            border: none;
+            cursor: pointer;
+        }
+        button:focus {outline:none;}
+
+        .center_flex {
+            width: 100%;
+            height: 100%;
+            /* background: lightgoldenrodyellow; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .center_flex_cen {
+            /* margin-top: 54px; */
+            width: 810px;
+            height: 336px;
+            /* background: pink; */
+        }
+
+        .bottom_right {
+            margin-top: 10px;
+            margin-right: 10px;
+            text-align: right;
+            font-size: 20px;
+            font-weight: 400;
+            color: rgba(85, 85, 85, 1);
+        }
+
+        .flex_for {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .flex_fors {
+            margin-top: 5px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .one {
+            text-align: center;
+            width: 110px;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba(234, 154, 36, 1);
+            /* height: 20px; */
+            /* background: lightgreen; */
+        }
+
+        .two {
+            text-align: center;
+            width: 122px;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba(234, 154, 36, 1);
+            /* height: 20px; */
+            /* background: limegreen; */
+        }
+
+        .three {
+            text-align: center;
+            width: 82px;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba(234, 154, 36, 1);
+            /* height: 20px; */
+            /* background: saddlebrown; */
+        }
+
+        .four {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgba(234, 154, 36, 1);
+            width: 80px;
+            /* height: 20px; */
+            /* background: darkgoldenrod; */
+        }
+
+        .ones {
+            text-align: center;
+            width: 110px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            font-size: 20px;
+            font-weight: 500;
+            color: #555555;
+            /* height: 20px; */
+            /* background: lightgreen; */
+        }
+
+        .twos {
+            text-align: center;
+            width: 122px;
+            font-size: 20px;
+            font-weight: 500;
+            color: #555555;
+            /* height: 20px; */
+            /* background: limegreen; */
+        }
+
+        .threes {
+            text-align: center;
+            width: 82px;
+            font-size: 20px;
+            font-weight: 500;
+            color: #555555;
+            /* height: 20px; */
+            /* background: saddlebrown; */
+        }
+
+        .fours {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 500;
+            color: #555555;
+            width: 80px;
+            /* height: 20px; */
+            /* background: darkgoldenrod; */
+        }
+
+        /* .many_center {
+            width: 800px;
+            height: 100%;
+            background: lightcyan;
+            flex-wrap: wrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        } */
+
+        .many_center_f {
+            margin-top: 40px;
+            flex-direction: row;
+            flex-wrap: wrap;
+            background: coral;
+            width: 700px;
+            height: 600px;
+            display: flex;
+        }
+
+        .text {
+            width: 200px;
+            height: 120px;
+            font-size: 40px;
+            font-family: Source Han Sans CN;
+            font-weight: bold;
+            color: rgba(85, 85, 85, 1);
+        }
+
+        .right_but {
+            position: absolute;
+            bottom: 0.1rem;
+            right: 0.1rem;
+            width: 0.2rem;
+            height: 0.2rem;
+        }
+
+        .right_but img {
+            width: 0.2rem;
+            height: 0.2rem;
+        }
+
+        .none_back {
+            height: 220px;
+            /* background: seagreen; */
+        }
+
+        .demos {
+            margin-top: 20px;
+            width: 100%;
+            height: 500px;
+            /* background: lightblue; */
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        .swiper-slide {
+            height: 75px !important;
+            margin-top: 5px;
+            display: flex;
+            justify-content: space-around;
+            /* background: lightblue; */
+        }
+        .dialog{
+          position: fixed;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,.5);
+          z-index: 9999;
+        }
+        .dialog ul{
+          position: absolute;
+          top: 25%;
+          list-style: none;
+          left: 50%;
+          transform: translateX(-50%);
+          padding: 0;
+        }
+        .dialog ul li{
+          width:600px;
+          height:120px;
+          background:rgba(241,241,241,1);
+          line-height: 120px;
+          text-align: center;
+          font-size:32px;
+          font-family:Source Han Sans CN;
+          font-weight:500;
+          color:rgba(64,64,64,1);
+          margin-top: 6px;
+          margin: 10px auto;
+        }
+        .dialog ul li:hover{
+          width:660px;
+          margin: 10px auto;
+          height:120px;
+          background:rgba(234,154,36,1);
+          box-shadow:0px 15px 34px 6px rgba(0, 0, 0, 0.4);
+          font-size:32px;
+          font-family:Source Han Sans CN;
+          font-weight:500;
+          color:rgba(255,255,255,1);
+          text-align: center;
+          line-height: 120px;
+        }
+        .dialog ul .active{
+          width:660px;
+          margin: 10px auto;
+          height:120px;
+          background:rgba(234,154,36,1);
+          box-shadow:0px 15px 34px 6px rgba(0, 0, 0, 0.4);
+          font-size:32px;
+          font-family:Source Han Sans CN;
+          font-weight:500;
+          color:rgba(255,255,255,1);
+          text-align: center;
+          line-height: 120px;
+        }
+        .btn2{
+          position: absolute !important;
+          bottom: 0.1rem;
+          right: 1rem;
+        }
+        .btn3{
+          position: absolute !important;
+          bottom: 0.1rem;
+          right: 0.5rem;
+          width: 0.44rem !important;
+        }
+        .footer{
+          font-family: "Noto Sans SC";
+          height: 0.35rem;
+        }
+        .footer p{
+          color: white;
+          font-size: 0.2rem;
+          text-align: center;
+          line-height: 0.35rem;
+          margin: 0;
+        }
+        .footer_left{
+          background: url('img/sukiBox.png')no-repeat;
+          background-size: 100%;
+          width: 2rem;
+          height: 0.3rem;
+          position: absolute;
+          left: 0.2rem;
+          top: 0.1rem;
+        }
+        .footer_right{
+          background: url('img/sukiBox.png')no-repeat;
+          background-size: 100%;
+          width: 2rem;
+          height: 0.3rem;
+          position: absolute;
+          right: 0.2rem;
+          top: 0.1rem;
+        }
+        .footer_roll_list{
+          position: absolute;
+          font-family: "Noto Sans SC";
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 0.45rem;
+          /* border-top: 0.01rem solid white; */
+        }
+        .roll_list_title{
+          width: 20.9%;
+          height: 0.45rem;
+          float: left;
+          background-color: #d3d3d3;
+          text-align: center;
+          color: black;
+          font-size: 0.28rem;
+          line-height: 0.45rem;
+        }
+        .roll_list{
+          width: 79%;
+          overflow-x: auto;
+          float: left;
+          background-color: #f25314;
+          position: relative;
+          height: 0.45rem;
+        }
+        .roll_list::-webkit-scrollbar {
+          display: none; /* Chrome Safari */
+        }
+        .roll_list .marquee{
+          color: black;
+          font-size: 0.26rem;
+          line-height: 0.45rem;
+          margin: 0 0.03rem 0 0;
+
+        }
+        .title1{
+          height: 0.4rem;
+          width: 100%;
+          background-color: #d3d3d3;
+          color: black;
+          text-align: center;
+          line-height: 0.4rem;
+          font-size: 0.22rem;
+        }
+        .list_btn{
+          width: 100%;
+          list-style: none;
+          height: 1.6rem;
+          overflow: hidden;
+          padding: 0;
+          margin: 0;
+        }
+        .list_btn li{
+          color: white;
+          /* width: 1.4rem; */
+          height: 0.5rem;
+          float: left;
+          font-size: 0.38rem;
+          margin-top: 0.02rem;
+          text-align: center;
+          cursor: pointer;
+          padding-left: 0.45rem;
+          /* margin-left: 0.2rem; */
+        }
+        .online_order{
+          /* float: left; */
+          padding-top: 0.14rem;
+          margin: 0 auto 0;
+          width: 95%;
+          height: 94%;
+          overflow: hidden;
+          overflow-y: scroll;
+        }
+        .online_order::-webkit-scrollbar {
+          display: none; /* Chrome Safari */
+        }
+        .order_list{
+          width: 100%;
+          list-style: none;
+          float: left;
+          overflow: hidden;
+          padding: 0;
+          margin: 0;
+          height: auto;
+        }
+        .order_list li{
+          color: white;
+          height: 0.45rem;
+          line-height: 0.45rem;
+          font-size: 0.18rem;
+          line-height: 0.5rem;
+          /* margin-top: 0.1rem; */
+          padding-left: 0.2rem;
+        }
+        [v-cloak] { display: none; }
+        /* .id{
+          width: 1280px;
+          height: 1024px;
+        } */
+        .box {
+          position: absolute;
+          left: 0.02rem;
+          top: 0;
+          width: 80000%;
+        }
+
+        .box div {
+          float: left;
+        }
+
+        .node {
+          position: absolute;
+          z-index: -999;
+          top: -999999px;
+          font-size: 0.26rem;
+          line-height: 0.35rem;
+          margin: 0 0.03rem 0 0;
+        }
+        .divBox{
+          width: 100%;
+          height: 3.8rem;
+        }
+        #div_box{
+          width: 100%;
+          height: 3.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="id">
+        <div class="many">
+            <div class="many_pos">
+                <!-- <img src="./img/back_transverse.png" alt=""> -->
+                <div class="title">
+                  <div class="many_center_two_title">门店订单</div>
+                  <div class="many_center_three_title">线上订单</div>
+                </div>
+                <div class="main_center">
+                  <div class="many_center_two">
+                    <div class="title1">请取货 Pick up</div>
+                    <ul class="list_btn">
+                      <li v-for="(item, index) in pickedUpList" :key="index" v-cloak>{{item.phoneMantissa}}
+                      </li>
+                    </ul>
+                    <div class="title1">打包中 Packing</div>
+                    <ul class="list_btn">
+                      <li v-for="(item, index) in listCard" :key="index" v-cloak>{{item.phoneMantissa}}
+                      </li>
+                    </ul>
+                    <div class="footer">
+                      <p>取货号为您手机号后四位 请留意观察</p>
+                    </div>
+                  </div>
+                  <div class="many_center_three">
+                    <div id="parent" class="online_order">
+                      <ul class="order_list" id="child1">
+                        <li v-for="(item, index) in onlineOrderList" :key="index" v-cloak>
+                          {{item.receiverName|testfile}}&nbsp;&nbsp;&nbsp;&nbsp;手机尾号：{{item.phoneMantissa|phonefile}}&nbsp;&nbsp;&nbsp;&nbsp;消费金额：¥{{item.payment}} 
+                        </li>
+                        <li class="divBox" id="div_box"></li>
+                      </ul>
+                      <!-- <div id="child2" class="list_btn"></div> -->
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="footer">
+                  <div class="footer_left"></div>
+                  <p>取货号为您手机号后四位 请留意观察</p>
+                  <div class="footer_right"></div>
+                </div> -->
+                <!-- <div class="footer_roll_list">
+                  <div class="roll_list_title">线上订单</div>
+                  <div class="roll_list">
+                    <div ref="box" class="box">
+                      <div ref="marquee" class="marquee" id="marquee">{{text}}</div>
+                      <div ref="copy" class="copy"></div>
+                    </div>
+                  </div>
+                </div> -->
+            </div>
+        </div>
+        <script src="./js/vue.min.js"> </script>
+        <script src="./js/jquery-3.4.1.min.js"></script>
+        <!-- 引入样式 -->
+        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+        <!-- 引入组件库 -->
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'Hello Vue!',
+                    distributorNumber: '',
+                    onlineId:"",
+                    // startUrl:"http://192.168.0.211:20003/api-RibbonManager/",
+                    startUrl:"https://qinfuji.com/api-RibbonManager/",
+                    pickedUpList:[],
+                    listCard:[],
+                    checked:false,
+                    number:5,
+                    text:"",
+                    onlineOrderList:[],
+                    orderStatus:"",
+                },
+                filters: {
+                  testfile (value) {
+                    if(value.length>3){
+                      const start = value.slice(0, 2)
+                      return `${start}*`
+                    }else{
+                      return value
+                    }
+                  },
+                  phonefile(value){
+                    const start = value.slice(0, 4)
+                    return `${start}`
+
+                  }
+                },
+                watch:{
+                  checked: {
+                    handler(newVal, oldVal) {
+                      if (newVal==true) {
+                        this.ticker = setInterval(() => {
+                          setTimeout(() => {
+                          ///调取接口获取数据
+                            this.logins()
+                            this.queryList()
+                            this.getPackingList()
+                          }, 0)
+                        }, this.number*1000)
+                      }else{
+                        clearInterval(this.ticker);
+                      }
+                    }
+                  },
+                  number:{
+                    handler(newVal, oldVal) {
+                      if (newVal!=oldVal) {
+                        // this.checked=false;
+                      }
+                    }
+                  }
+
+                },
+                mounted() {
+                    this._main()
+                },
+                methods: {
+                    // 返回
+                    backHome(){
+                      window.location.href='./index.html'
+                    },
+                    //查询列表
+                    queryList() {
+                      let that = this;
+                      $.post(that.startUrl + "youzhan/orderForm/youzan/getNoticeYouZanTvBetaken",{
+                        "distributorNumber":that.distributorNumber
+                      }, (data) => {
+                          if (data.code != 200) {
+                            that.$message.error("抱歉，网络异常！")
+                          } else {
+                            that.pickedUpList=data.data
+                          }
+                      });
+                    },
+                    //查询滚动列表
+                    queryRollList() {
+                      let that = this;
+                      that.getVirtualOrder()
+                      $.post(that.startUrl + "youzhan/orderForm/youzan/FindYouZhanOnlineOrder",{
+                        "distributorNumber":that.onlineId
+                      }, (data) => {
+                          if (data.code != 200) {
+                            that.$message.error("抱歉，网络异常！")
+                          } else {
+                            if(that.orderStatus){
+                              $.post(that.startUrl + "youzhan/orderForm/youzan/getYouzanFictitiousapOrder",{
+                              }, (res) => {
+                                  if (res.code != 200) {
+                                    that.$message.error("抱歉，网络异常！")
+                                  } else {
+                                    that.onlineOrderList=data.data
+                                    that.onlineOrderList= that.onlineOrderList.concat(res.data)
+                                  }
+                              });
+                            }else{
+                              that.onlineOrderList=data.data
+                            }
+                          }
+                          console.log(that.onlineOrderList)
+                          this.$nextTick(()=>{
+                            that.rollList()
+                          })
+                      });
+                    },
+                    logins() {
+                      let that = this;
+                      $.post(that.startUrl + "youzhan/orderForm/youzan/tvBetakenPhoneBank",{
+                        "distributorNumber":that.distributorNumber
+                      }, (data) => {
+                          if (data.code != 200) {
+                            that.$message.error("抱歉，网络异常！")
+                          } else {
+                            that.listCard=data.data
+                          }
+                      });
+                    },
+                    rollList(){
+                      var parent = document.getElementById('parent');
+                      var child1 = document.getElementById('child1');
+                      var divBox=document.getElementById('div_box');
+                      
+                      this.tickerRoll = setInterval(() => {
+                          if((parent.scrollTop+parent.clientHeight) >= child1.scrollHeight) {
+                              parent.scrollTop = 0;
+                              clearInterval(this.tickerRoll);
+                              this.queryRollList()
+                              // debugger
+                          } else {
+                              parent.scrollTop++;
+                          }
+                          console.log(parent.scrollTop,parent.clientHeight,child1.scrollHeight)
+                      }, 70);
+                    },
+                    // 获取有赞的打包列表
+                    getPackingList() {
+                      let that = this;
+                      $.post(that.startUrl + "youzhan/orderForm/youzan/tvBetakenPhone",{
+                        "distributorNumber":that.distributorNumber
+                      }, (data) => {
+                          // if (data.code != 200) {
+                          //   that.$message.error("抱歉，网络异常！")
+                          // } else {
+                          //   that.listCard=data.data
+                          // }
+                      });
+                    },
+                    _main() {
+                      let that = this
+                      that.distributorNumber = localStorage.getItem('storeNumber')
+                      that.onlineId=localStorage.getItem('onlineId')
+                      that.checked=true
+                      that.queryList();
+                      that.queryRollList()
+                      that.logins();
+                    },
+                    // 获取有赞门店是否开启虚拟订单数据
+                    getVirtualOrder(){
+                      let that = this;
+                      $.post(that.startUrl + "youzhan/orderForm/youzan/fictitiousap",{
+                        "distributorNumber":that.onlineId
+                      }, (data) => {
+                          if (data.code != 200) {
+                            that.$message.error("抱歉，网络异常！")
+                          } else {
+                            that.orderStatus=data.data
+                          }
+                      });
+                    },
+                   
+                    move () {
+                      // 获取文字text 的计算后宽度  （由于overflow的存在，直接获取不到，需要独立的node计算）
+                      console.log(this.text)
+                      let width = this.$refs.marquee.getBoundingClientRect().width
+                      //this.$refs.copy.innerText = this.text // 文字副本填充
+                      let distance = 0 // 位移距离
+                      // 设置位移
+                      this.tickerRollList= setInterval(() => {
+                        distance = distance - 1
+                        // 如果位移超过文字宽度，则回到起点
+                        if (-distance >= width) {
+                          clearInterval(this.tickerRollList);
+                          this.queryRollList()
+                          // distance = 16
+                        }
+                        this.$refs.box.style.transform = 'translateX(' + distance + 'px)'
+                      }, 20)
+                    }
+                },
+            })
+
+        </script>
+</body>
+
+</html>

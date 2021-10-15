@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<title>SN'SUKI品牌介绍</title>
+	<style>
+		.index_img {
+			width: 10rem;
+		}
+
+		.stick {
+			position: fixed;
+			top: 15.54rem;
+			left: 8.4rem;
+			width: 1.6rem;
+			height: 1.6rem;
+			background: url("./imgs/brand/标签.png");
+		}
+
+		img {
+			width: 100%;
+			height: 100%;
+			display: block;
+		}
+
+		html,body {
+			margin: 0;
+			scroll-behavior: smooth;
+		}
+
+		.flexd_img {
+			position: fixed;
+			right: 0;
+			top: 6.4rem;
+			display: none;
+		}
+
+		.flexd_img img {
+			width: 1.6rem;
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="index_img">
+		<img src="./imgs/brand/品牌介绍_01.png" alt="">
+		<img src="./imgs/brand/品牌介绍_02.png" alt="">
+		<img src="./imgs/brand/品牌介绍_03.png" alt="">
+		<img src="./imgs/brand/品牌介绍_04.png" alt="">
+		<img src="./imgs/brand/品牌介绍_05.png" alt="">
+		<img src="./imgs/brand/品牌介绍_06.png" alt="">
+		<img src="./imgs/brand/品牌介绍_07.png" alt="">
+		<img src="./imgs/brand/品牌介绍_08.png" alt="">
+		<img src="./imgs/brand/品牌介绍_09.png" alt="">
+		<img src="./imgs/brand/品牌介绍_10.png" alt="">
+		<img src="./imgs/brand/品牌介绍_11.png" alt="">
+	</div>
+	<div class="stick" onclick="backTop()"></div>
+	<script>
+		function stick() {
+			location.href = "brand.html"
+		}
+		// window.onscroll = function () {
+		// 	if (document.documentElement.scrollTop + document.body.scrollTop > 100) {
+		// 		document.getElementById("scrollto").style.display = "block";
+		// 	}
+		// 	else {
+		// 		document.getElementById("scrollto").style.display = "none";
+		// 	}
+		// }
+		backTop = function () {
+			if (!document.querySelector(".stick")) { return; }
+			document.querySelector(".stick").addEventListener("click", function () {
+				setTimeout(scrollTo, 100, 0, 1); return false;
+			}, false);
+		}
+		function sticks() {
+			var getTop = document.querySelector(".stick");
+			var head = document.getElementById("head");
+			var time = setInterval(function () {
+				document.body.scrollTop = document.body.scrollTop - 50;
+				if (document.body.scrollTop === 0) {
+					clearInterval(time);
+				}
+			}, 1);
+		}
+
+	</script>
+	<script src="./js/rem.js"></script>
+
+</body>
+
+</html>

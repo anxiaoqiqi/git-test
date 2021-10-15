@@ -1,0 +1,164 @@
+.all{
+  width: 90%;
+  height: 600px;
+  background: #FFFFFF;
+  border-radius: 4px;
+  margin: 20px auto 0;
+}
+.head{
+  width: 100%;
+  line-height: 60px;
+  font-size: 20px;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #404040;
+  text-align: center;
+  position: relative;
+}
+.head span{
+  position: absolute;
+  top: 0px;
+  right: 11px;
+  font-size: 15px;
+  color: #FF4240;
+}
+.content{
+  width: 100%;
+  overflow-y: auto;
+  height: 520px;
+}
+.listCard{
+  width: 90%;
+  margin: 0 auto;
+}
+.listCard li{
+  /* background: url('../image/listCard.png')no-repeat; */
+  width: 100%;
+  height: 2.2rem;
+  margin-bottom: 15px;
+  background-size: 100% 100%;
+  overflow: hidden;
+  box-shadow: 0px 4px 9px 1px rgba(37, 36, 36, 0.05);
+  position: relative;
+  
+}
+.left_div{
+  width: 2.9rem;
+  float: left;
+  height: 100%;
+  background: linear-gradient(90deg, #FF5223 0%, #FF4240 100%);
+  position: relative;
+}
+.left_div i{
+  width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+}
+.left_div p{
+  font-size: 15px;
+  font-family: Source Han Sans SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 0.8rem;
+  text-align: center;
+}
+.left_div p span{
+  font-size: 30px;
+  font-family: Source Han Sans SC;
+  font-weight: bold;
+  color: #FFFFFF;
+  position: relative;
+  top: 0.3rem;
+}
+.left_div h4{
+  font-size: 12px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 1rem;
+}
+.right_div{
+  width: 5rem;
+  float: left;
+  height: 100%;
+}
+.right_div h4{
+  font-size: 18px;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #FF4240;
+  text-indent: 0.3rem;
+  margin-top: 0.2rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.right_div p{
+  font-size: 12px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #404040;
+  margin-top: 0.15rem;
+  text-indent: 0.3rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.listCard li .btn{
+  position: absolute;
+  top: 0.15rem;
+  right: 0.15rem;
+  width: 0.9rem;
+  height: 0.5rem;
+  background: #FFFFFF;
+  border: 1px solid #EA9A24;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 0.5rem;
+  font-size: 12px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #EA9A24;
+
+}
+.no_more{
+  text-align: center;
+  font-size: 15px;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #989898;
+  margin-top: 250px;
+}
+#error_rule{
+  display: none;
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+.error_mark{
+  background: url("../image/error_mark.png")no-repeat;
+  background-size: 100% 100%;
+  width: 300px;
+  height: 230px;
+  position: absolute;
+  top: 20%;
+  left: 15%;
+}
+.error_mark p{
+  width: 50%;
+  margin: 62px auto 0;
+  text-indent: 3px;
+  color: #1d1b1b;
+  font-size: 15px;
+  text-align: center;
+}
